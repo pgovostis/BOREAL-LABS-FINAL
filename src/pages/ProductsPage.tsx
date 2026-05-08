@@ -23,7 +23,6 @@ export default function ProductsPage() {
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-12">
           <div className="pill-badge mb-6 border-emerald-200 bg-emerald-50 text-emerald-700">Research Catalog</div>
           <h1 className="title-display text-4xl lg:text-6xl mb-4">All <span className="text-emerald-600">Products</span></h1>
-          <p className="text-slate-500 text-lg font-medium max-w-xl">Browse our complete inventory of research-grade peptides. All compounds verified by independent third-party HPLC/MS analysis.</p>
         </motion.div>
 
         <div className="flex flex-col md:flex-row gap-4 mb-10 items-start md:items-center justify-between">
