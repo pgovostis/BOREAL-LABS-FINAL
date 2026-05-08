@@ -167,13 +167,7 @@ export default function ProductDetailPage() {
                 </div>
               </div>
 
-              {/* Form badge */}
-              <div className="absolute top-6 right-6 bg-white/90 backdrop-blur-sm border border-slate-200 rounded-lg px-3 py-2 shadow-lg">
-                <div className="text-[8px] font-bold text-slate-400 tracking-widest uppercase mb-0.5">
-                  Form
-                </div>
-                <div className="text-xs font-bold text-slate-900">{product.form}</div>
-              </div>
+
             </div>
           </motion.div>
 
@@ -310,7 +304,7 @@ export default function ProductDetailPage() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="mt-20"
+          className="mt-10 sm:mt-20"
         >
           <div className="flex border-b border-slate-100 mb-8 overflow-x-auto scrollbar-hide">
             {(
