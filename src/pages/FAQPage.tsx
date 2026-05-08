@@ -2,6 +2,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { useState } from 'react';
 import { ChevronDown, HelpCircle } from 'lucide-react';
 import { cn } from '../lib/utils';
+import { Link } from 'react-router-dom';
 
 const FAQ_SECTIONS = [
   {
@@ -64,7 +65,7 @@ export default function FAQPage() {
         <div className="mt-20 text-center p-10 rounded-2xl border border-slate-100 bg-slate-50/50">
           <h3 className="font-display font-bold text-xl text-slate-900 mb-2 tracking-tight">Still have questions?</h3>
           <p className="text-sm text-slate-500 mb-6">Our team is happy to help.</p>
-          <a href="/contact" className="btn-primary inline-block">Contact Us</a>
+          <Link to="/contact#contact-form" className="btn-primary inline-block">Contact Us</Link>
         </div>
       </div>
     </section>

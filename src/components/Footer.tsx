@@ -52,7 +52,7 @@ export default function Footer() {
               <input 
                 type="email" 
                 placeholder="EMAIL ADDRESS" 
-                className="bg-transparent border-none focus:ring-0 text-[11px] uppercase tracking-widest flex-1 outline-none placeholder:text-slate-300 font-bold"
+                className="bg-transparent border-none focus:ring-0 text-[11px] uppercase tracking-widest flex-1 outline-none placeholder:text-slate-400 font-bold text-slate-900"
               />
               <button className="text-slate-900 hover:text-emerald-600 transition-colors">
                 <ArrowRight size={18} />
@@ -61,7 +61,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="h-32 bg-white/5 border border-white/10 rounded-2xl px-12 flex items-center justify-between mt-12">
+        <div className="min-h-[8rem] py-6 md:h-32 md:py-0 bg-slate-900 border border-slate-800 shadow-2xl rounded-2xl px-6 md:px-12 flex flex-col md:flex-row items-center justify-center md:justify-between mt-12 gap-6 md:gap-0">
           <div className="flex gap-16">
             <div>
               <p className="text-[9px] text-slate-500 uppercase tracking-widest mb-1.5 font-bold">Testing Authority</p>
