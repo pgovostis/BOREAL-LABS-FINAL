@@ -34,9 +34,9 @@ export default function Testimonials() {
           </h2>
         </div>
         
-        <div className="flex md:grid md:grid-cols-3 gap-6 sm:gap-8 overflow-x-auto md:overflow-x-visible pb-8 md:pb-0 -mx-6 px-6 sm:-mx-12 sm:px-12 md:mx-0 md:px-0 snap-x snap-mandatory scrollbar-hide">
+        <div className="flex md:grid md:grid-cols-3 gap-8 overflow-x-auto md:overflow-x-visible pb-8 md:pb-0 -mx-6 px-6 sm:-mx-12 sm:px-12 md:mx-0 md:px-0 snap-x snap-mandatory scrollbar-hide">
           {testimonials.map((t, i) => (
-            <div key={i} className="min-w-[80vw] sm:min-w-[60vw] md:min-w-0 snap-center shrink-0 pr-4 sm:pr-0">
+            <div key={i} className="min-w-[85vw] sm:min-w-[60vw] md:min-w-0 snap-center">
               <div className="bg-slate-50 border border-slate-200 shadow-sm p-8 rounded-2xl flex flex-col h-full hover:-translate-y-1 transition-transform duration-300">
                 <div className="flex gap-1 mb-6">
                 {[...Array(t.rating)].map((_, j) => (
