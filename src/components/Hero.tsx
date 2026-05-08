@@ -12,7 +12,7 @@ export default function Hero() {
         <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-teal-600/5 rounded-full blur-[140px]" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 grid lg:grid-cols-2 gap-16 items-center relative z-10">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 grid lg:grid-cols-2 gap-16 lg:gap-12 xl:gap-20 items-center relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -46,7 +46,7 @@ export default function Hero() {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, delay: 0.2 }}
-          className="relative flex items-center justify-center p-12"
+          className="relative flex items-center justify-center lg:justify-end xl:justify-center p-8 lg:p-0 xl:p-12 w-full"
         >
           {/* Soft glow backdrop */}
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
@@ -57,14 +57,14 @@ export default function Hero() {
             <div className="absolute w-80 h-80 border border-emerald-100/20 rounded-full" />
           </div>
 
-          <div className="relative z-20 animate-float">
+          <div className="relative z-20 animate-float mt-8 lg:mt-0">
              <img 
                src="/images/bpc-157-vial.png" 
                alt="Boreal Labs BPC-157 Peptide Vial" 
-               className="w-80 drop-shadow-2xl"
+               className="w-64 lg:w-72 xl:w-80 drop-shadow-2xl mx-auto"
              />
-             <div className="absolute -right-10 bottom-16 w-28 h-28 border border-emerald-500/20 rounded-full flex flex-col items-center justify-center bg-white/90 backdrop-blur-xl shadow-xl transform rotate-12">
-               <span className="text-emerald-600 font-bold text-sm tracking-tighter leading-none text-center">99%<br/>PURITY</span>
+             <div className="absolute -right-4 lg:-right-8 xl:-right-10 bottom-12 xl:bottom-16 w-24 lg:w-28 h-24 lg:h-28 border border-emerald-500/20 rounded-full flex flex-col items-center justify-center bg-white/90 backdrop-blur-xl shadow-xl transform rotate-12">
+               <span className="text-emerald-600 font-bold text-xs xl:text-sm tracking-tighter leading-none text-center">99%<br/>PURITY</span>
              </div>
           </div>
         </motion.div>
