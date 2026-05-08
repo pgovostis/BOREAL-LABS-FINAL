@@ -312,19 +312,19 @@ export default function ProductDetailPage() {
           transition={{ delay: 0.3 }}
           className="mt-20"
         >
-          <div className="flex gap-1 border-b border-slate-100 mb-8">
+          <div className="flex border-b border-slate-100 mb-8 overflow-x-auto scrollbar-hide">
             {(
               [
-                { key: 'description', label: 'Full Description' },
+                { key: 'description', label: 'Description' },
                 { key: 'specs', label: 'Specifications' },
-                { key: 'storage', label: 'Storage & Handling' },
+                { key: 'storage', label: 'Storage' },
               ] as const
             ).map((tab) => (
               <button
                 key={tab.key}
                 onClick={() => setActiveTab(tab.key)}
                 className={cn(
-                  'px-6 py-3 text-xs font-bold uppercase tracking-widest transition-all border-b-2 -mb-[1px]',
+                  'flex-1 whitespace-nowrap px-3 sm:px-6 py-3 text-[10px] sm:text-xs font-bold uppercase tracking-widest transition-all border-b-2 -mb-[1px] text-center',
                   activeTab === tab.key
                     ? 'border-emerald-500 text-emerald-600'
                     : 'border-transparent text-slate-400 hover:text-slate-600'
