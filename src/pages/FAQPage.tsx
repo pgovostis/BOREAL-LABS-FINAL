@@ -10,7 +10,7 @@ const FAQ_SECTIONS = [
     items: [
       { q: 'How long does shipping take?', a: 'Orders placed before 2:00 PM EST typically ship the same day. While standard delivery generally takes 1–2 business days across Canada, please note that these timeframes are estimates and cannot be strictly guaranteed.' },
       { q: 'Do you ship internationally?', a: 'Currently, we exclusively ship within Canada.' },
-      { q: 'What payment methods do you accept?', a: 'We securely accept Interac e-Transfer, PayPal, and a variety of cryptocurrencies including Bitcoin (BTC) and Ethereum (ETH).' },
+      { q: 'What payment methods do you accept?', a: 'We offer secure payment checkout through PayPal. Your payment information is fully encrypted and processed safely — we never store your financial data.' },
     ],
   },
   {

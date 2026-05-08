@@ -67,7 +67,7 @@ export const ALL_PRODUCTS: ProductData[] = [
     purity: '≥99%',
     form: 'Lyophilized Powder',
     storage: 'Store refrigerated. Keep away from direct sunlight.',
-    image: '/images/ghk-cu-50mg.png',
+    image: '/images/ghk-cu-50mg.jpg',
   },
   {
     slug: 'kpv',
@@ -80,7 +80,7 @@ export const ALL_PRODUCTS: ProductData[] = [
     purity: '≥99%',
     form: 'Lyophilized Powder',
     storage: 'Store refrigerated. Keep away from direct sunlight.',
-    image: '/images/kpv-10mg.png',
+    image: '/images/kpv-10mg.jpg',
   },
 
   // ── Tissue Repair ──
@@ -108,7 +108,7 @@ export const ALL_PRODUCTS: ProductData[] = [
     purity: '≥99%',
     form: 'Lyophilized Powder',
     storage: 'Store refrigerated. Keep sealed and protected from moisture.',
-    image: '/images/tb-500-5mg.png',
+    image: '/images/tb-500-5mg.jpg',
   },
   {
     slug: 'bpc-157-tb-500-blend-5',
@@ -134,6 +134,7 @@ export const ALL_PRODUCTS: ProductData[] = [
     purity: '≥99%',
     form: 'Lyophilized Powder',
     storage: 'Store refrigerated. Reconstitute with bacteriostatic water.',
+    image: '/images/bpc-tb-blend-10mg.jpg',
   },
   {
     slug: 'glow',
@@ -226,7 +227,7 @@ export const ALL_PRODUCTS: ProductData[] = [
     purity: '≥99%',
     form: 'Lyophilized Powder',
     storage: 'Store refrigerated. Reconstitute with bacteriostatic water.',
-    image: '/images/sermorelin-10mg.png',
+    image: '/images/sermorelin-10mg.jpg',
   },
   {
     slug: 'tesamorelin',
@@ -280,6 +281,7 @@ export const ALL_PRODUCTS: ProductData[] = [
     purity: '≥99%',
     form: 'Lyophilized Powder',
     storage: 'Store refrigerated. Do not freeze.',
+    image: '/images/semaglutide-5mg.jpg',
   },
   {
     slug: 'tirzepatide',
@@ -292,6 +294,7 @@ export const ALL_PRODUCTS: ProductData[] = [
     purity: '≥99%',
     form: 'Lyophilized Powder',
     storage: 'Store refrigerated. Do not freeze.',
+    image: '/images/tirzepatide-10mg.jpg',
   },
   {
     slug: 'retatrutide',
@@ -304,6 +307,7 @@ export const ALL_PRODUCTS: ProductData[] = [
     purity: '≥99%',
     form: 'Lyophilized Powder',
     storage: 'Store refrigerated. Do not freeze.',
+    image: '/images/retatrutide-10mg.jpg',
   },
   {
     slug: 'mots-c',
@@ -331,6 +335,7 @@ export const ALL_PRODUCTS: ProductData[] = [
     purity: '≥99%',
     form: 'Lyophilized Powder',
     storage: 'Store refrigerated. Keep away from direct sunlight.',
+    image: '/images/semax-10mg.jpg',
   },
   {
     slug: 'selank',
@@ -343,6 +348,7 @@ export const ALL_PRODUCTS: ProductData[] = [
     purity: '≥99%',
     form: 'Lyophilized Powder',
     storage: 'Store refrigerated. Keep away from direct sunlight.',
+    image: '/images/selank-10mg.jpg',
   },
 
   // ── Tanning ──
@@ -351,24 +357,26 @@ export const ALL_PRODUCTS: ProductData[] = [
     id: 'MT-1',
     name: 'Melanotan I',
     categories: ['Tanning'],
-    variants: [{ dosage: '1mg', price: '$19.99' }, { dosage: '10mg', price: '$59.99' }],
+    variants: [{ dosage: '10mg', price: '$59.99' }],
     description: 'Melanotan I is a tanning peptide that stimulates your body\'s natural melanin production — the pigment responsible for a tanned appearance. It works gradually and evenly, providing a natural-looking tan with significantly less UV exposure needed. A popular choice for those who want sun-kissed skin safely.',
     benefits: ['Natural melanin stimulation', 'Even, gradual tan', 'Reduces UV exposure needed', 'Natural-looking results'],
     purity: '≥99%',
     form: 'Lyophilized Powder',
     storage: 'Store refrigerated. Keep away from direct sunlight.',
+    image: '/images/mt-1-10mg.jpg',
   },
   {
     slug: 'melanotan-2',
     id: 'MT-2',
     name: 'Melanotan II',
     categories: ['Tanning'],
-    variants: [{ dosage: '2mg', price: '$24.99' }, { dosage: '10mg', price: '$59.99' }],
+    variants: [{ dosage: '10mg', price: '$59.99' }],
     description: 'Melanotan II is the faster-acting tanning peptide that delivers deeper, darker results in less time. It activates multiple pathways to boost melanin production rapidly. MT-II is the preferred choice for those looking for more dramatic tanning results with minimal sun exposure.',
     benefits: ['Faster tanning results', 'Deeper, darker tan', 'Minimal sun exposure needed', 'Rapid melanin boost'],
     purity: '≥99%',
     form: 'Lyophilized Powder',
     storage: 'Store refrigerated. Keep away from direct sunlight.',
+    image: '/images/mt-2-10mg.jpg',
   },
 
   // ── Reconstitution ──

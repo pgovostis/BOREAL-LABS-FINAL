@@ -14,6 +14,7 @@ import LabResultsPage from './pages/LabResultsPage';
 import FAQPage from './pages/FAQPage';
 import ContactPage from './pages/ContactPage';
 import AffiliatePage from './pages/AffiliatePage';
+import CheckoutPage from './pages/CheckoutPage';
 import { CartProvider } from './lib/CartContext';
 import CartDrawer from './components/CartDrawer';
 
@@ -33,6 +34,7 @@ export default function App() {
           <Route path="/faq" element={<FAQPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/affiliate" element={<AffiliatePage />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
         </Routes>
       </main>
       <Footer />

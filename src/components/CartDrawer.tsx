@@ -121,9 +121,13 @@ export default function CartDrawer() {
                 <p className="text-xs text-slate-500 mb-6 text-center">
                   Shipping and taxes calculated at checkout.
                 </p>
-                <button className="w-full btn-primary py-4 rounded-xl text-lg flex items-center justify-center gap-2">
+                <Link
+                  to="/checkout"
+                  onClick={() => setIsCartOpen(false)}
+                  className="w-full btn-primary py-4 rounded-xl text-lg flex items-center justify-center gap-2"
+                >
                   Proceed to Checkout
-                </button>
+                </Link>
               </div>
             )}
           </motion.div>
