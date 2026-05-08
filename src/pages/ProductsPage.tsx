@@ -32,7 +32,7 @@ export default function ProductsPage() {
             <input type="text" placeholder="Search peptides..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-lg text-sm focus:outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400 transition-all bg-slate-50 focus:bg-white" />
           </div>
-          <div className="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0 scrollbar-hide">
+          <div className="flex flex-wrap items-center gap-2">
             {CATEGORIES.map(cat => (
               <button key={cat} onClick={() => setActiveCategory(cat)}
                 className={cn("px-5 py-2 rounded-sm text-[10px] uppercase tracking-widest font-bold transition-all border whitespace-nowrap",
