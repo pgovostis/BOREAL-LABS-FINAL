@@ -1,16 +1,16 @@
-import { FlaskConical, Shield, TreePine, Truck } from 'lucide-react';
+import { FlaskConical, DollarSign, TreePine, Truck } from 'lucide-react';
 
 export default function WhyChooseUs() {
   const features = [
     {
       icon: <FlaskConical className="text-emerald-500 group-hover:text-white transition-colors duration-500" size={28} strokeWidth={1.5} />,
-      title: "HPLC Verified",
-      description: "Every batch undergoes rigorous HPLC testing to ensure ≥99% purity before release."
+      title: "Third-Party Tested",
+      description: "Every batch undergoes rigorous third-party HPLC testing to ensure ≥99% purity before release."
     },
     {
-      icon: <Shield className="text-emerald-500 group-hover:text-white transition-colors duration-500" size={28} strokeWidth={1.5} />,
-      title: "Third-Party Tested",
-      description: "Independent lab verification with full mass spectrometry and endotoxin testing."
+      icon: <DollarSign className="text-emerald-500 group-hover:text-white transition-colors duration-500" size={28} strokeWidth={1.5} />,
+      title: "Most Competitive Pricing",
+      description: "Premium research-grade peptides at the best prices in Canada — quality you can trust without breaking the bank."
     },
     {
       icon: <TreePine className="text-emerald-500 group-hover:text-white transition-colors duration-500" size={28} strokeWidth={1.5} />,

@@ -229,10 +229,7 @@ export default function ProductDetailPage() {
               </span>
             </div>
 
-            {/* Short description */}
-            <p className="text-slate-500 font-medium leading-relaxed mb-8 text-sm lg:text-base">
-              {product.description}
-            </p>
+
 
             {/* Dosage Variant Selector */}
             {product.variants.length > 1 && (
@@ -314,6 +311,13 @@ export default function ProductDetailPage() {
                 ))}
               </div>
             </div>
+
+            {/* Research Use Disclaimer */}
+            <div className="mt-6 p-4 bg-amber-50 border border-amber-200 rounded-lg text-xs text-amber-800">
+              <strong className="uppercase tracking-wider">Research Use Only</strong> — This product is
+              intended for laboratory research purposes only. Not for human consumption. No
+              therapeutic claims are made or implied.
+            </div>
           </motion.div>
         </div>
 
@@ -356,11 +360,6 @@ export default function ProductDetailPage() {
                 className="prose prose-slate prose-sm"
               >
                 <p className="text-slate-600 leading-relaxed">{product.description}</p>
-                <div className="mt-6 p-4 bg-amber-50 border border-amber-200 rounded-lg text-xs text-amber-800">
-                  <strong className="uppercase tracking-wider">Research Use Only</strong> — This product is
-                  intended for laboratory research purposes only. Not for human consumption. No
-                  therapeutic claims are made or implied.
-                </div>
               </motion.div>
             )}
 
@@ -381,7 +380,7 @@ export default function ProductDetailPage() {
                       label: 'Available Quantities',
                       value: product.variants.map((v) => v.dosage).join(', '),
                     },
-                    { label: 'Verification', value: 'Third-Party HPLC/MS' },
+                    { label: 'Verification', value: 'Third-Party HPLC' },
                     { label: 'Origin', value: 'Ontario, Canada' },
                   ].map((spec) => (
                     <div
