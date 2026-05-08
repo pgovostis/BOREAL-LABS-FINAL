@@ -61,28 +61,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="min-h-[8rem] py-6 md:h-32 md:py-0 bg-slate-900 border border-slate-800 shadow-2xl rounded-2xl px-6 md:px-12 flex flex-col md:flex-row items-center justify-center md:justify-between mt-12 gap-6 md:gap-0">
-          <div className="flex gap-16">
-            <div>
-              <p className="text-[9px] text-slate-500 uppercase tracking-widest mb-1.5 font-bold">Testing Authority</p>
-              <p className="text-white font-bold text-sm tracking-tight">JANO/MZ BIOLABS</p>
-            </div>
-            <div className="hidden sm:block">
-              <p className="text-[9px] text-slate-500 uppercase tracking-widest mb-1.5 font-bold">Production</p>
-              <p className="text-white font-bold text-sm tracking-tight">ONTARIO, CA</p>
-            </div>
-          </div>
-          
-          <div className="flex items-center gap-6">
-            <div className="text-right hidden md:block">
-              <p className="text-xs text-white font-bold">Trusted by Research Institutions</p>
-              <p className="text-[9px] text-slate-500 uppercase tracking-widest font-bold">Across North America</p>
-            </div>
-            <div className="w-10 h-6 bg-red-600 rounded-sm flex items-center justify-center">
-               <div className="text-[10px]">🍁</div>
-            </div>
-          </div>
-        </div>
+
         
         <div className="mt-12 text-center">
           <p className="text-[10px] text-slate-700 uppercase tracking-[0.3em] font-bold">
