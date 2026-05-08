@@ -23,8 +23,8 @@ export const CATEGORIES = [
   'Tissue Repair',
   'Muscle Growth',
   'Fat Loss',
-  'Nootropics',
   'Tanning',
+  'Nootropics',
   'Reconstitution',
 ] as const;
 
