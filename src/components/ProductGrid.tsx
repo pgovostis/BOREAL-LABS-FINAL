@@ -1,23 +1,29 @@
 import React from 'react';
 import ProductCard from './ProductCard';
-import { Product } from '../types';
+import { ALL_PRODUCTS } from '../data/products';
 import { cn } from '../lib/utils';
+import { Link } from 'react-router-dom';
 
-const PRODUCTS: Product[] = [
-  { id: 'GHK-CU', name: 'GHK-Cu', category: 'Anti Aging', price: '$49.99', dosage: '50mg', image: '', link: '#' },
-  { id: 'CJC', name: 'CJC-1295 + Ipamorelin', category: 'Muscle Growth', price: '$94.99', dosage: '10mg', image: '', link: '#' },
-  { id: 'BPC', name: 'BPC-157', category: 'Recovery', price: '$92.99', dosage: '10mg', image: '', link: '#' },
-  { id: 'MOTS-C', name: 'MOTS-c', category: 'Anti Aging', price: '$64.99', dosage: '10mg', image: '', link: '#' },
-  { id: 'AOD', name: 'AOD-9604', category: 'Weight Loss', price: '$59.99', dosage: '5mg', image: '', link: '#' },
-  { id: 'NAD+', name: 'NAD+', category: 'Anti Aging', price: '$129.99', dosage: '500mg', image: '', link: '#' },
-  { id: 'MT-2', name: 'Melanotan II', category: 'Tanning', price: '$59.99', dosage: '10mg', image: '', link: '#' },
-  { id: 'SEMAX', name: 'Semax', category: 'Cognitive', price: '$79.99', dosage: '30mg', image: '', link: '#' },
+// Show a curated subset on the home page (8 featured products)
+const FEATURED_SLUGS = [
+  'bpc-157',
+  'semaglutide',
+  'ghk-cu',
+  'cjc-1295-ipamorelin-blend',
+  'tb-500',
+  'mots-c',
+  'nad-plus',
+  'tirzepatide',
 ];
+
+const FEATURED_PRODUCTS = FEATURED_SLUGS
+  .map(slug => ALL_PRODUCTS.find(p => p.slug === slug)!)
+  .filter(Boolean);
 
 export default function ProductGrid() {
   return (
     <section className="py-24 bg-white" id="catalog">
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-[1400px] mx-auto px-4">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
           <div className="max-w-xl">
             <h2 className="title-display text-4xl lg:text-5xl mb-6">
@@ -28,25 +34,25 @@ export default function ProductGrid() {
             </p>
           </div>
           <div className="flex items-center gap-3 overflow-x-auto pb-4 md:pb-0 scrollbar-hide">
-            <FilterPill label="All" active />
-            <FilterPill label="Muscle" />
-            <FilterPill label="Recovery" />
-            <FilterPill label="Anti-Aging" />
+            <FilterPill label="Featured" active />
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {PRODUCTS.map(product => (
-            <div key={product.id}>
+        <div className="flex md:grid md:grid-cols-2 lg:grid-cols-4 gap-4 overflow-x-auto md:overflow-x-visible pb-8 md:pb-0 -mx-4 px-4 md:mx-0 md:px-0 snap-x snap-mandatory scrollbar-hide">
+          {FEATURED_PRODUCTS.map(product => (
+            <div key={product.slug} className="min-w-[85vw] sm:min-w-[45vw] md:min-w-0 snap-center">
               <ProductCard product={product} />
             </div>
           ))}
         </div>
 
         <div className="mt-20 text-center">
-          <button className="px-12 py-4 border border-slate-200 text-slate-900 font-bold text-xs uppercase tracking-[0.2em] hover:bg-slate-900 hover:text-white transition-all duration-500">
-            View All Research Products
-          </button>
+          <Link 
+            to="/products"
+            className="px-12 py-4 bg-emerald-600 text-white font-bold text-xs uppercase tracking-[0.2em] hover:bg-emerald-700 transition-all duration-500 inline-block rounded-sm shadow-sm"
+          >
+            View All Products
+          </Link>
         </div>
       </div>
     </section>

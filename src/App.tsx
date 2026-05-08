@@ -3,49 +3,35 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import Stats from './components/Stats';
-import ProductGrid from './components/ProductGrid';
-import LabStandards from './components/LabStandards';
 import Footer from './components/Footer';
+import ScrollToTop from './components/ScrollToTop';
+import HomePage from './pages/HomePage';
+import ProductsPage from './pages/ProductsPage';
+import ProductDetailPage from './pages/ProductDetailPage';
+import LabResultsPage from './pages/LabResultsPage';
+import FAQPage from './pages/FAQPage';
+import ContactPage from './pages/ContactPage';
+import AffiliatePage from './pages/AffiliatePage';
 
 export default function App() {
   return (
     <div className="min-h-screen flex flex-col bg-white">
+      <ScrollToTop />
       <Navbar />
-      <main className="flex-1">
-        <Hero />
-        <div className="-mt-16 relative z-20">
-          <Stats />
-        </div>
-        <ProductGrid />
-        <LabStandards />
-        
-        {/* Ticker / Trust Bar */}
-        <section className="bg-slate-50 py-10 overflow-hidden border-y border-slate-100">
-          <div className="flex animate-[marquee_40s_linear_infinite] whitespace-nowrap gap-24">
-            {[...Array(6)].map((_, i) => (
-              <div key={i} className="flex items-center gap-24 text-slate-400 font-display font-bold text-[10px] tracking-[0.4em] uppercase">
-                <span>Analytical Precision</span>
-                <span className="size-1 rounded-full bg-emerald-500" />
-                <span>Ontario Laboratory</span>
-                <span className="size-1 rounded-full bg-emerald-500" />
-                <span>Third Party Verified</span>
-                <span className="size-1 rounded-full bg-emerald-500" />
-              </div>
-            ))}
-          </div>
-        </section>
+      <main className="flex-1 pt-8">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/products" element={<ProductsPage />} />
+          <Route path="/products/:slug" element={<ProductDetailPage />} />
+          <Route path="/lab-results" element={<LabResultsPage />} />
+          <Route path="/faq" element={<FAQPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/affiliate" element={<AffiliatePage />} />
+        </Routes>
       </main>
       <Footer />
-      
-      <style>{`
-        @keyframes marquee {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-      `}</style>
     </div>
   );
 }
