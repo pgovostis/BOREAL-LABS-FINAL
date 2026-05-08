@@ -248,7 +248,7 @@ export default function CheckoutPage() {
                           className={inputCls + ' bg-slate-50 text-slate-400 cursor-not-allowed'} />
                       </div>
                     </div>
-                    <div className="flex gap-3 mt-2">
+                    <div className="flex flex-col sm:flex-row gap-3 mt-2">
                       <button onClick={() => setActiveStep(0)}
                         className="flex-1 btn-secondary rounded-xl">Back</button>
                       <button onClick={() => setActiveStep(2)}
@@ -282,7 +282,7 @@ export default function CheckoutPage() {
                         className={inputCls + ' resize-none'} />
                     </div>
 
-                    <div className="flex gap-3 mt-2">
+                    <div className="flex flex-col sm:flex-row gap-3 mt-2">
                       <button onClick={() => setActiveStep(1)}
                         className="flex-1 btn-secondary rounded-xl">Back</button>
                       <button className="flex-1 btn-primary rounded-xl flex items-center justify-center gap-2">
@@ -455,7 +455,7 @@ export default function CheckoutPage() {
                       dosage: bacWater.variants[0].dosage,
                       price: parseFloat(bacWater.variants[0].price.replace('$', '')),
                       image: bacWater.image,
-                    })}
+                    }, false)}
                     className="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold uppercase tracking-wider rounded-lg transition-colors"
                   >
                     + Add
