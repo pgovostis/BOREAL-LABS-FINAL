@@ -4,6 +4,7 @@ import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { cn } from '../lib/utils';
 import { ProductData } from '../data/products';
+import { useCart } from '../lib/CartContext';
 
 const CATEGORY_COLORS: Record<string, string> = {
   'anti-aging': 'text-rose-400 border-rose-500/30 bg-rose-500/10',
@@ -25,6 +26,21 @@ export default function ProductCard({ product }: { product: ProductData }) {
   const dosageLabel = hasMultipleVariants
     ? product.variants.map(v => v.dosage).join(' / ')
     : product.variants[0].dosage;
+
+  const { addItem } = useCart();
+  const numericPrice = parseFloat(startingPrice.replace('$', ''));
+
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.preventDefault();
+    addItem({
+      id: `${product.slug}-${product.variants[0].dosage}`,
+      productId: product.id,
+      name: product.name,
+      dosage: product.variants[0].dosage,
+      price: numericPrice,
+      image: product.image
+    });
+  };
 
   return (
     <Link to={`/products/${product.slug}`}>
@@ -53,7 +69,10 @@ export default function ProductCard({ product }: { product: ProductData }) {
               <div className="w-full h-2 bg-gradient-to-t from-slate-200 to-transparent rounded-b-md" />
             </div>
           )}
-          <button className="absolute top-3 right-3 text-slate-400 hover:text-emerald-600 transition-colors z-10" onClick={(e) => e.preventDefault()}>
+          <button 
+            className="absolute top-3 right-3 text-slate-400 hover:text-emerald-600 transition-colors z-10" 
+            onClick={handleAddToCart}
+          >
             <ShoppingCart size={16} />
           </button>
           <div className="absolute inset-0 bg-emerald-600/0 group-hover:bg-emerald-600/5 transition-colors duration-500" />
@@ -83,9 +102,12 @@ export default function ProductCard({ product }: { product: ProductData }) {
                 <span className="text-[10px] text-slate-400 ml-1 uppercase font-medium">CAD</span>
               </div>
             </div>
-            <div className="size-10 rounded-full bg-slate-900 text-white flex items-center justify-center group-hover:bg-emerald-600 transition-all transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 shadow-xl">
+            <button 
+              onClick={handleAddToCart}
+              className="size-10 rounded-full bg-slate-900 text-white flex items-center justify-center group-hover:bg-emerald-600 transition-all transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 shadow-xl"
+            >
               <ShoppingCart size={18} />
-            </div>
+            </button>
           </div>
         </div>
       </motion.div>

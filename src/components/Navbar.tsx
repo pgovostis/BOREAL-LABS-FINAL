@@ -3,6 +3,7 @@ import { ShoppingCart, Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Link, useLocation } from 'react-router-dom';
 import { cn } from '../lib/utils';
+import { useCart } from '../lib/CartContext';
 
 const NAV_LINKS = [
   { label: 'Products', path: '/products' },
@@ -15,6 +16,7 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const { cartCount, toggleCart } = useCart();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -97,6 +99,19 @@ export default function Navbar() {
           >
             Become an Affiliate
           </Link>
+
+          {/* Cart Toggle */}
+          <button 
+            onClick={() => toggleCart()}
+            className="relative p-2 text-slate-900 hover:text-emerald-600 transition-colors"
+          >
+            <ShoppingCart size={22} />
+            {cartCount > 0 && (
+              <span className="absolute top-0 right-0 w-4 h-4 bg-emerald-600 text-white rounded-full text-[10px] font-bold flex items-center justify-center">
+                {cartCount}
+              </span>
+            )}
+          </button>
 
           {/* Mobile Menu Toggle */}
           <button

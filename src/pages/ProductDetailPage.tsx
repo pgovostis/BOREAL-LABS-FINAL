@@ -16,6 +16,7 @@ import {
 import { getProductBySlug, ALL_PRODUCTS, ProductData } from '../data/products';
 import { cn } from '../lib/utils';
 import { getCategoryColor } from '../components/ProductCard';
+import { useCart } from '../lib/CartContext';
 
 export default function ProductDetailPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -23,6 +24,7 @@ export default function ProductDetailPage() {
   const product = getProductBySlug(slug || '');
   const [selectedVariant, setSelectedVariant] = useState(0);
   const [activeTab, setActiveTab] = useState<'description' | 'specs' | 'storage'>('description');
+  const { addItem } = useCart();
 
   // Scroll to top on page load
   useEffect(() => {
@@ -49,6 +51,19 @@ export default function ProductDetailPage() {
   const relatedProducts = ALL_PRODUCTS.filter(
     (p) => p.slug !== product.slug && p.categories.some(c => product.categories.includes(c))
   ).slice(0, 4);
+
+  const handleAddToCart = () => {
+    const variant = product.variants[selectedVariant];
+    const numericPrice = parseFloat(variant.price.replace('$', ''));
+    addItem({
+      id: `${product.slug}-${variant.dosage}`,
+      productId: product.id,
+      name: product.name,
+      dosage: variant.dosage,
+      price: numericPrice,
+      image: product.image
+    });
+  };
 
   return (
     <section className="pt-28 pb-24 bg-white min-h-screen">
@@ -266,7 +281,10 @@ export default function ProductDetailPage() {
 
             {/* Action Buttons */}
             <div className="flex gap-3 mb-10">
-              <button className="flex-1 btn-primary flex items-center justify-center gap-2 rounded-lg">
+              <button 
+                onClick={handleAddToCart}
+                className="flex-1 btn-primary flex items-center justify-center gap-2 rounded-lg"
+              >
                 <ShoppingCart size={16} />
                 Add to Cart
               </button>

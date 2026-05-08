@@ -14,13 +14,17 @@ import LabResultsPage from './pages/LabResultsPage';
 import FAQPage from './pages/FAQPage';
 import ContactPage from './pages/ContactPage';
 import AffiliatePage from './pages/AffiliatePage';
+import { CartProvider } from './lib/CartContext';
+import CartDrawer from './components/CartDrawer';
 
 export default function App() {
   return (
-    <div className="min-h-screen flex flex-col bg-white">
-      <ScrollToTop />
-      <Navbar />
-      <main className="flex-1 pt-8">
+    <CartProvider>
+      <div className="min-h-screen flex flex-col bg-white">
+        <ScrollToTop />
+        <Navbar />
+        <CartDrawer />
+        <main className="flex-1 pt-8">
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/products" element={<ProductsPage />} />
@@ -33,5 +37,6 @@ export default function App() {
       </main>
       <Footer />
     </div>
+    </CartProvider>
   );
 }
