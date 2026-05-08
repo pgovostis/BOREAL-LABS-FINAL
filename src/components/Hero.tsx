@@ -32,11 +32,11 @@ export default function Hero() {
             competitive pricing you can count on.
           </p>
           
-          <div className="flex gap-4">
-            <Link to="/products" id="browse-catalog-btn" className="btn-primary">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+            <Link to="/products" id="browse-catalog-btn" className="btn-primary text-center">
               Explore Catalog
             </Link>
-            <button id="learn-more-btn" className="btn-secondary border shadow-sm">
+            <button id="learn-more-btn" className="btn-secondary border shadow-sm text-center">
               Lab Verified
             </button>
           </div>

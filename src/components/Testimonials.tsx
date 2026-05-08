@@ -23,8 +23,8 @@ export default function Testimonials() {
   ];
 
   return (
-    <section className="py-24 bg-white border-t border-slate-100">
-      <div className="max-w-7xl mx-auto px-12">
+    <section className="pt-16 pb-12 sm:py-24 bg-white border-t border-slate-100">
+      <div className="max-w-7xl mx-auto px-6 sm:px-12">
         <div className="text-center mb-16">
           <div className="pill-badge mb-6">
             Community Feedback
@@ -34,10 +34,10 @@ export default function Testimonials() {
           </h2>
         </div>
         
-        <div className="flex md:grid md:grid-cols-3 gap-8 overflow-x-auto md:overflow-x-visible pb-8 md:pb-0 -mx-4 px-4 md:mx-0 md:px-0 snap-x snap-mandatory scrollbar-hide">
+        <div className="flex md:grid md:grid-cols-3 gap-6 sm:gap-8 overflow-x-auto md:overflow-x-visible pb-8 md:pb-0 -mx-6 px-6 sm:-mx-12 sm:px-12 md:mx-0 md:px-0 snap-x snap-mandatory scrollbar-hide">
           {testimonials.map((t, i) => (
-            <div key={i} className="min-w-[85vw] sm:min-w-[60vw] md:min-w-0 snap-center">
-              <div className="glass-card p-8 rounded-2xl flex flex-col h-full hover:-translate-y-1 transition-transform duration-300">
+            <div key={i} className="min-w-[80vw] sm:min-w-[60vw] md:min-w-0 snap-center shrink-0 pr-4 sm:pr-0">
+              <div className="bg-slate-50 border border-slate-200 shadow-sm p-8 rounded-2xl flex flex-col h-full hover:-translate-y-1 transition-transform duration-300">
                 <div className="flex gap-1 mb-6">
                 {[...Array(t.rating)].map((_, j) => (
                   <Star key={j} className="text-emerald-500 fill-emerald-500" size={18} />
@@ -58,6 +58,12 @@ export default function Testimonials() {
             </div>
             </div>
           ))}
+        </div>
+        <div className="flex justify-center mt-4 mb-4 md:hidden">
+          <div className="flex items-center gap-2 text-slate-400 text-sm font-medium animate-pulse">
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+            <span>Swipe for more</span>
+          </div>
         </div>
       </div>
     </section>

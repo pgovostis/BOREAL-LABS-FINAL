@@ -22,7 +22,7 @@ const FEATURED_PRODUCTS = FEATURED_SLUGS
 
 export default function ProductGrid() {
   return (
-    <section className="py-24 bg-white" id="catalog">
+    <section className="py-16 sm:py-24 bg-white" id="catalog">
       <div className="max-w-[1400px] mx-auto px-4">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
           <div className="max-w-xl">
@@ -46,7 +46,7 @@ export default function ProductGrid() {
           ))}
         </div>
 
-        <div className="mt-20 text-center">
+        <div className="mt-12 sm:mt-20 text-center">
           <Link 
             to="/products"
             className="px-12 py-4 bg-emerald-600 text-white font-bold text-xs uppercase tracking-[0.2em] hover:bg-emerald-700 transition-all duration-500 inline-block rounded-sm shadow-sm"
