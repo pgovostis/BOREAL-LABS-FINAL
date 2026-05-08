@@ -67,7 +67,7 @@ export default function ContactPage() {
                 </div>
               </div>
             ) : (
-              <form id="contact-form" onSubmit={handleSubmit} className="scroll-mt-32 p-8 rounded-2xl border border-slate-100 bg-slate-50/30 space-y-6">
+              <form id="contact-form" onSubmit={handleSubmit} className="scroll-mt-48 p-8 rounded-2xl border border-slate-100 bg-slate-50/30 space-y-6">
                 <div className="grid sm:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-[10px] uppercase tracking-[0.15em] font-bold text-slate-400 mb-2">Name</label>
