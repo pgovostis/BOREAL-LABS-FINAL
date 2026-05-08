@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 export default function Hero() {
   return (
-    <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-slate-50 pt-32 pb-16 lg:pt-40 lg:pb-24" id="hero-section">
+    <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-slate-50 pt-32 pb-16" id="hero-section">
       {/* Background elements */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none opacity-40">
         <div className="absolute top-1/2 left-0 w-full h-full bg-[linear-gradient(rgba(16,185,129,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(16,185,129,0.05)_1px,transparent_1px)] bg-[size:60px_60px]" />
