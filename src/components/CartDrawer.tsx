@@ -25,17 +25,38 @@ export default function CartDrawer() {
             className="fixed top-0 right-0 h-full w-full max-w-md bg-white shadow-2xl z-[100] flex flex-col"
           >
             {/* Header */}
-            <div className="flex items-center justify-between p-6 border-b border-slate-100">
-              <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2">
-                <ShoppingBag size={20} className="text-emerald-600" />
-                Your Cart
-              </h2>
-              <button
-                onClick={() => setIsCartOpen(false)}
-                className="p-2 hover:bg-slate-100 rounded-full transition-colors"
-              >
-                <X size={20} className="text-slate-500" />
-              </button>
+            <div className="flex flex-col border-b border-slate-100">
+              <div className="flex items-center justify-between p-6 pb-4">
+                <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2">
+                  <ShoppingBag size={20} className="text-emerald-600" />
+                  Your Cart
+                </h2>
+                <button
+                  onClick={() => setIsCartOpen(false)}
+                  className="p-2 hover:bg-slate-100 rounded-full transition-colors"
+                >
+                  <X size={20} className="text-slate-500" />
+                </button>
+              </div>
+
+              {/* Free Shipping Progress */}
+              <div className="px-6 pb-6">
+                <div className="flex items-center justify-between text-xs mb-2">
+                  <span className="font-bold text-slate-700">
+                    {cartTotal >= 250 
+                      ? 'You unlocked free shipping! 🎉'
+                      : `Add $${(250 - cartTotal).toFixed(2)} for free shipping!`}
+                  </span>
+                </div>
+                <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                  <motion.div 
+                    initial={{ width: 0 }}
+                    animate={{ width: `${Math.min(100, (cartTotal / 250) * 100)}%` }}
+                    transition={{ duration: 0.5, ease: 'easeOut' }}
+                    className="h-full bg-emerald-500 rounded-full"
+                  />
+                </div>
+              </div>
             </div>
 
             {/* Cart Items */}
