@@ -28,7 +28,7 @@ const PROVINCE_TAX_RATES: Record<string, { rate: number; label: string }> = {
   'New Brunswick':                { rate: 0.15, label: 'HST (15%)' },
   'Newfoundland and Labrador':    { rate: 0.15, label: 'HST (15%)' },
   'Northwest Territories':        { rate: 0.05, label: 'GST (5%)' },
-  'Nova Scotia':                  { rate: 0.15, label: 'HST (15%)' },
+  'Nova Scotia':                  { rate: 0.14, label: 'HST (14%)' },
   'Nunavut':                      { rate: 0.05, label: 'GST (5%)' },
   'Ontario':                      { rate: 0.13, label: 'HST (13%)' },
   'Prince Edward Island':         { rate: 0.15, label: 'HST (15%)' },
