@@ -383,7 +383,7 @@ export const ALL_PRODUCTS: ProductData[] = [
   {
     slug: 'pfizer-bacteriostatic-water',
     id: 'BAC-H2O',
-    name: 'Pfizer Bacteriostatic Water',
+    name: 'Bacteriostatic Water (Pfizer)',
     categories: ['Reconstitution'],
     variants: [{ dosage: '30mL', price: '$20' }],
     description: 'Authentic Pfizer Bacteriostatic Water for Injection is a sterile, non-pyrogenic preparation containing 0.9% (9 mg/mL) benzyl alcohol added as a bacteriostatic preservative. It is the gold standard and strictly essential for the safe, proper reconstitution and long-term preservation of your lyophilized research peptides.',
