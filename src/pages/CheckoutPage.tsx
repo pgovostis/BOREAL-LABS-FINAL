@@ -436,9 +436,13 @@ export default function CheckoutPage() {
                 className="mt-4 bg-white rounded-2xl border border-dashed border-emerald-300 p-5 flex items-center gap-4"
               >
                 <div className="w-14 h-14 bg-emerald-50 rounded-xl flex items-center justify-center p-1.5 shrink-0 border border-emerald-100">
-                  <div className="w-5 h-9 bg-gradient-to-b from-emerald-100 to-emerald-200 rounded shadow-sm border border-white/80 flex items-center justify-center">
-                    <span className="text-[5px] font-bold text-emerald-800">BAC</span>
-                  </div>
+                  {bacWater.image ? (
+                    <img src={bacWater.image} alt={bacWater.name} className="w-full h-full object-contain mix-blend-multiply" />
+                  ) : (
+                    <div className="w-5 h-9 bg-gradient-to-b from-emerald-100 to-emerald-200 rounded shadow-sm border border-white/80 flex items-center justify-center">
+                      <span className="text-[5px] font-bold text-emerald-800">BAC</span>
+                    </div>
+                  )}
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="text-[10px] font-bold uppercase tracking-wider text-emerald-600 mb-0.5">Recommended Add-on</p>
