@@ -391,6 +391,7 @@ export const ALL_PRODUCTS: ProductData[] = [
     purity: 'Sterile USP',
     form: 'Liquid Solution',
     storage: 'Store at 20° to 25°C (68° to 77°F).',
+    image: '/images/pfizer-bac-water.png',
   },
 ];
 
