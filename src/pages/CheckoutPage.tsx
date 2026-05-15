@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
-import { ShieldCheck, Truck, Lock, ChevronLeft, Package, CreditCard, MapPin, User, Plus, Minus, Trash2, Tag } from 'lucide-react';
+import { ShieldCheck, Truck, Lock, ChevronLeft, Package, CreditCard, MapPin, User, Plus, Minus, Trash2, Tag, Loader2, CheckCircle2 } from 'lucide-react';
 import { useCart } from '../lib/CartContext';
 import { ALL_PRODUCTS } from '../data/products';
+import { supabase } from '../lib/supabase';
 
 const FREE_SHIPPING_THRESHOLD = 300;
 
@@ -40,12 +41,14 @@ const PROVINCE_TAX_RATES: Record<string, { rate: number; label: string }> = {
 const PROVINCES = Object.keys(PROVINCE_TAX_RATES);
 
 export default function CheckoutPage() {
-  const { items, cartTotal, cartCount, updateQuantity, removeItem, addItem } = useCart();
+  const { items, cartTotal, cartCount, updateQuantity, removeItem, addItem, clearCart } = useCart();
   const [activeStep, setActiveStep] = useState(0);
   const [form, setForm] = useState<FormData>({
     email: '', firstName: '', lastName: '', address: '', apartment: '',
     city: '', province: '', postalCode: '', phone: '', orderNotes: '',
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
 
   const bacWater = ALL_PRODUCTS.find(p => p.id === 'BAC-H2O');
   const bacWaterInCart = items.some(i => i.productId === 'BAC-H2O');
@@ -79,6 +82,48 @@ export default function CheckoutPage() {
     setAppliedCoupon(null);
     setCouponCode('');
     setCouponError('');
+  };
+
+  const handlePlaceOrder = async () => {
+    if (cartCount === 0 && activeStep !== 3) return;
+    setIsSubmitting(true);
+    setSubmitError('');
+
+    try {
+      const { error } = await supabase.from('orders').insert([
+        {
+          customer_email: form.email,
+          customer_first_name: form.firstName,
+          customer_last_name: form.lastName,
+          shipping_address: form.address,
+          shipping_apartment: form.apartment,
+          shipping_city: form.city,
+          shipping_province: form.province,
+          shipping_postal_code: form.postalCode,
+          customer_phone: form.phone,
+          order_notes: form.orderNotes,
+          items: items,
+          subtotal: cartTotal,
+          discount: discount,
+          shipping_cost: shippingCost,
+          tax: tax,
+          total: orderTotal,
+          status: 'pending'
+        }
+      ]);
+
+      if (error) {
+        throw error;
+      }
+
+      clearCart();
+      setActiveStep(3); // Success step
+    } catch (err: any) {
+      console.error('Error placing order:', err);
+      setSubmitError(err.message || 'Something went wrong while placing your order. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const steps = [
@@ -152,22 +197,24 @@ export default function CheckoutPage() {
               className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden"
             >
               {/* Steps */}
-              <div className="flex border-b border-slate-100">
-                {steps.map((step, i) => (
-                  <button
-                    key={step.label}
-                    onClick={() => setActiveStep(i)}
-                    className={`flex-1 flex items-center justify-center gap-2 py-4 text-xs font-bold uppercase tracking-wider transition-all relative
-                      ${activeStep === i ? 'text-emerald-600 bg-emerald-50/50' : 'text-slate-400 hover:text-slate-600'}`}
-                  >
-                    <step.icon size={14} />
-                    {step.label}
-                    {activeStep === i && (
-                      <motion.div layoutId="step-indicator" className="absolute bottom-0 left-0 right-0 h-0.5 bg-emerald-500" />
-                    )}
-                  </button>
-                ))}
-              </div>
+              {activeStep !== 3 && (
+                <div className="flex border-b border-slate-100">
+                  {steps.map((step, i) => (
+                    <button
+                      key={step.label}
+                      onClick={() => setActiveStep(i)}
+                      className={`flex-1 flex items-center justify-center gap-2 py-4 text-xs font-bold uppercase tracking-wider transition-all relative
+                        ${activeStep === i ? 'text-emerald-600 bg-emerald-50/50' : 'text-slate-400 hover:text-slate-600'}`}
+                    >
+                      <step.icon size={14} />
+                      {step.label}
+                      {activeStep === i && (
+                        <motion.div layoutId="step-indicator" className="absolute bottom-0 left-0 right-0 h-0.5 bg-emerald-500" />
+                      )}
+                    </button>
+                  ))}
+                </div>
+              )}
 
               <div className="p-6 sm:p-8">
                 {/* Step 0: Contact */}
@@ -283,13 +330,35 @@ export default function CheckoutPage() {
                     </div>
 
                     <div className="flex flex-col sm:flex-row gap-3 mt-2">
-                      <button onClick={() => setActiveStep(1)}
-                        className="flex-1 btn-secondary rounded-xl">Back</button>
-                      <button className="flex-1 btn-primary rounded-xl flex items-center justify-center gap-2">
-                        <Lock size={14} />
-                        Place Order — ${orderTotal.toFixed(2)} CAD
+                      <button onClick={() => setActiveStep(1)} disabled={isSubmitting}
+                        className="flex-1 btn-secondary rounded-xl disabled:opacity-50 disabled:cursor-not-allowed">Back</button>
+                      <button onClick={handlePlaceOrder} disabled={isSubmitting}
+                        className="flex-1 btn-primary rounded-xl flex items-center justify-center gap-2 disabled:opacity-75 disabled:cursor-not-allowed">
+                        {isSubmitting ? <Loader2 size={14} className="animate-spin" /> : <Lock size={14} />}
+                        {isSubmitting ? 'Processing...' : `Place Order — $${orderTotal.toFixed(2)} CAD`}
                       </button>
                     </div>
+                    {submitError && (
+                      <div className="p-3 bg-red-50 border border-red-200 text-red-600 text-sm font-medium rounded-lg text-center mt-3">
+                        {submitError}
+                      </div>
+                    )}
+                  </motion.div>
+                )}
+
+                {/* Step 3: Success */}
+                {activeStep === 3 && (
+                  <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="text-center py-12">
+                    <div className="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                      <CheckCircle2 size={40} />
+                    </div>
+                    <h2 className="text-3xl font-display font-bold text-slate-900 mb-4 tracking-tight">Order Received!</h2>
+                    <p className="text-slate-500 text-lg mb-8 max-w-md mx-auto">
+                      Thank you for your order. We've received your information and will contact you shortly at <span className="font-semibold text-slate-900">{form.email}</span> with payment instructions.
+                    </p>
+                    <Link to="/" className="btn-primary rounded-xl px-8">
+                      Return Home
+                    </Link>
                   </motion.div>
                 )}
               </div>
