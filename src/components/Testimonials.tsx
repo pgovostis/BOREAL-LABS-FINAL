@@ -5,19 +5,19 @@ export default function Testimonials() {
     {
       name: "Marcus T.",
       role: "Powerlifter",
-      quote: "Boreal Peps is the real deal. My recovery times have absolutely plummeted since I started researching with their BPC-157. Purity is clearly top-tier.",
+      quote: "Tried a few Canadian sources before finding Boreal. Prices are unmatched, I haven't found better value anywhere. Quality is exactly what you'd expect at twice the cost. Can't go wrong honestly.",
       rating: 5
     },
     {
       name: "David R.",
       role: "Strength Coach",
-      quote: "Been in the iron game for 10 years and finding a reliable Canadian source was always a headache. These guys ship fast and the quality is unmatched. The vials are always perfectly vacuum sealed.",
+      quote: "Been researching peptides for years and Boreal is up there with the best. Consistent quality, fair prices, and they actually respond when you reach out. Won't be going anywhere else.",
       rating: 5
     },
     {
       name: "Alex M.",
       role: "Bodybuilder",
-      quote: "The HPLC reports gave me peace of mind, but the actual results in the lab speak for themselves. You don't get these kinds of outcomes with under-dosed gear. Boreal is my go-to now.",
+      quote: "Been ordering from Boreal for about 6 months now. Quality is consistent every time and results speak for themselves. Communication is quick and shipping is always faster than expected. Highly recommend.",
       rating: 5
     }
   ];
