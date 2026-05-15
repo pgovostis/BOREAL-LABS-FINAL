@@ -69,12 +69,6 @@ export default function ProductCard({ product }: { product: ProductData }) {
               <div className="w-full h-2 bg-gradient-to-t from-slate-200 to-transparent rounded-b-md" />
             </div>
           )}
-          <button 
-            className="absolute top-3 right-3 text-slate-400 hover:text-emerald-600 transition-colors z-10" 
-            onClick={handleAddToCart}
-          >
-            <ShoppingCart size={16} />
-          </button>
           <div className="absolute inset-0 bg-emerald-600/0 group-hover:bg-emerald-600/5 transition-colors duration-500" />
         </div>
 
@@ -92,7 +86,7 @@ export default function ProductCard({ product }: { product: ProductData }) {
           <div className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-auto">
             {dosageLabel}
           </div>
-          <div className="mt-auto pt-6 flex items-end justify-between">
+          <div className="mt-auto pt-4 flex items-end justify-between">
             <div>
               <div className="text-[10px] text-slate-400 uppercase tracking-widest mb-1 font-bold">
                 {hasMultipleVariants ? 'Starting at' : 'Research Grade'}
@@ -102,13 +96,18 @@ export default function ProductCard({ product }: { product: ProductData }) {
                 <span className="text-[10px] text-slate-400 ml-1 uppercase font-medium">CAD</span>
               </div>
             </div>
-            <button 
-              onClick={handleAddToCart}
-              className="size-10 rounded-full bg-slate-900 text-white flex items-center justify-center group-hover:bg-emerald-600 transition-all transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 shadow-xl"
-            >
-              <ShoppingCart size={18} />
-            </button>
           </div>
+        </div>
+
+        {/* Full-width Add to Cart button */}
+        <div className="px-3 pb-3 relative z-10">
+          <button 
+            onClick={handleAddToCart}
+            className="w-full py-2.5 rounded-full bg-emerald-600 hover:bg-emerald-700 active:scale-[0.98] text-white text-sm font-semibold tracking-wide flex items-center justify-center gap-2 transition-all duration-200 shadow-md shadow-emerald-600/20 hover:shadow-lg hover:shadow-emerald-600/30"
+          >
+            <ShoppingCart size={16} />
+            Add to Cart
+          </button>
         </div>
       </motion.div>
     </Link>
