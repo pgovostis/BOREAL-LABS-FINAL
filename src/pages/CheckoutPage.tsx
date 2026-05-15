@@ -5,7 +5,7 @@ import { ShieldCheck, Truck, Lock, ChevronLeft, Package, CreditCard, MapPin, Use
 import { useCart } from '../lib/CartContext';
 import { ALL_PRODUCTS } from '../data/products';
 
-const FREE_SHIPPING_THRESHOLD = 250;
+const FREE_SHIPPING_THRESHOLD = 300;
 
 interface FormData {
   email: string;

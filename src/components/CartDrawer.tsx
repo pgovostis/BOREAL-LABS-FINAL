@@ -43,15 +43,15 @@ export default function CartDrawer() {
               <div className="px-6 pb-6">
                 <div className="flex items-center justify-between text-xs mb-2">
                   <span className="font-bold text-slate-700">
-                    {cartTotal >= 250 
+                    {cartTotal >= 300 
                       ? 'You unlocked free shipping! 🎉'
-                      : `Add $${(250 - cartTotal).toFixed(2)} for free shipping!`}
+                      : `Add $${(300 - cartTotal).toFixed(2)} for free shipping!`}
                   </span>
                 </div>
                 <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
                   <motion.div 
                     initial={{ width: 0 }}
-                    animate={{ width: `${Math.min(100, (cartTotal / 250) * 100)}%` }}
+                    animate={{ width: `${Math.min(100, (cartTotal / 300) * 100)}%` }}
                     transition={{ duration: 0.5, ease: 'easeOut' }}
                     className="h-full bg-emerald-500 rounded-full"
                   />

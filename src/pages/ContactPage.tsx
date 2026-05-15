@@ -1,14 +1,43 @@
 import { motion } from 'motion/react';
-import { Mail, MapPin, Clock, Send } from 'lucide-react';
+import { Mail, MapPin, Clock, Send, Loader2 } from 'lucide-react';
 import { useState } from 'react';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setLoading(true);
+    setError('');
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          access_key: '80860783-1f75-4789-a3a3-b961cc986e94',
+          from_name: 'Boreal Labs Website',
+          subject: `Contact Form: ${formData.subject}`,
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+        }),
+      });
+
+      const result = await response.json();
+      if (result.success) {
+        setSubmitted(true);
+      } else {
+        setError('Something went wrong. Please try again or email us directly.');
+      }
+    } catch {
+      setError('Network error. Please try again or email us directly at info@boreallabs.ca.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -29,7 +58,7 @@ export default function ContactPage() {
           <div className="space-y-6">
             {[
               { icon: <Mail size={20} />, title: 'Email', detail: 'info@boreallabs.ca', sub: 'We reply within 24 hours' },
-              { icon: <MapPin size={20} />, title: 'Location', detail: 'Ontario, Canada', sub: 'Synthesized & shipped locally' },
+              { icon: <MapPin size={20} />, title: 'Location', detail: 'Ontario, Canada', sub: 'Shipped locally' },
               { icon: <Clock size={20} />, title: 'Hours', detail: 'Mon – Fri, 9am – 5pm EST', sub: 'Excluding holidays' },
             ].map((item, i) => (
               <motion.div
@@ -106,9 +135,14 @@ export default function ContactPage() {
                     placeholder="Tell us how we can help..."
                   />
                 </div>
-                <button type="submit" className="btn-primary w-full flex items-center justify-center gap-2">
-                  <Send size={16} />
-                  Send Message
+                {error && (
+                  <div className="p-3 rounded-lg bg-red-50 border border-red-200 text-red-600 text-sm font-medium">
+                    {error}
+                  </div>
+                )}
+                <button type="submit" disabled={loading} className="btn-primary w-full flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed">
+                  {loading ? <Loader2 size={16} className="animate-spin" /> : <Send size={16} />}
+                  {loading ? 'Sending...' : 'Send Message'}
                 </button>
               </form>
             )}

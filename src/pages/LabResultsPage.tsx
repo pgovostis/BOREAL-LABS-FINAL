@@ -1,15 +1,15 @@
 import { motion } from 'motion/react';
-import { ShieldCheck, FileText, Download, ExternalLink, Microscope, FlaskConical, CheckCircle } from 'lucide-react';
+import { ShieldCheck, FileText, Microscope, FlaskConical, CheckCircle } from 'lucide-react';
 
 const LAB_REPORTS = [
-  { peptide: 'BPC-157', batch: 'BL-2026-0412', purity: '99.4%', method: 'HPLC / MS', lab: 'MZ Biolabs', date: 'April 2026' },
-  { peptide: 'GHK-Cu', batch: 'BL-2026-0389', purity: '99.7%', method: 'HPLC / MS', lab: 'Jano Sciences', date: 'April 2026' },
-  { peptide: 'CJC-1295 + Ipamorelin', batch: 'BL-2026-0401', purity: '99.2%', method: 'HPLC', lab: 'MZ Biolabs', date: 'March 2026' },
-  { peptide: 'MOTS-c', batch: 'BL-2026-0367', purity: '99.5%', method: 'HPLC / MS', lab: 'Jano Sciences', date: 'March 2026' },
-  { peptide: 'AOD-9604', batch: 'BL-2026-0355', purity: '99.1%', method: 'HPLC', lab: 'MZ Biolabs', date: 'March 2026' },
-  { peptide: 'NAD+', batch: 'BL-2026-0378', purity: '99.8%', method: 'HPLC / MS', lab: 'Jano Sciences', date: 'February 2026' },
-  { peptide: 'TB-500', batch: 'BL-2026-0340', purity: '99.3%', method: 'HPLC', lab: 'MZ Biolabs', date: 'February 2026' },
-  { peptide: 'Semax', batch: 'BL-2026-0322', purity: '99.6%', method: 'HPLC / MS', lab: 'Jano Sciences', date: 'January 2026' },
+  { peptide: 'BPC-157', purity: '99.4%', method: 'HPLC / MS', lab: 'MZ Biolabs', date: 'April 2026' },
+  { peptide: 'GHK-Cu', purity: '99.7%', method: 'HPLC / MS', lab: 'Jano Sciences', date: 'April 2026' },
+  { peptide: 'CJC-1295 + Ipamorelin', purity: '99.2%', method: 'HPLC', lab: 'MZ Biolabs', date: 'March 2026' },
+  { peptide: 'MOTS-c', purity: '99.5%', method: 'HPLC / MS', lab: 'Jano Sciences', date: 'March 2026' },
+  { peptide: 'AOD-9604', purity: '99.1%', method: 'HPLC', lab: 'MZ Biolabs', date: 'March 2026' },
+  { peptide: 'NAD+', purity: '99.8%', method: 'HPLC / MS', lab: 'Jano Sciences', date: 'February 2026' },
+  { peptide: 'TB-500', purity: '99.3%', method: 'HPLC', lab: 'MZ Biolabs', date: 'February 2026' },
+  { peptide: 'Semax', purity: '99.6%', method: 'HPLC / MS', lab: 'Jano Sciences', date: 'January 2026' },
 ];
 
 export default function LabResultsPage() {
@@ -53,23 +53,22 @@ export default function LabResultsPage() {
           ))}
         </div>
 
-        {/* Lab Reports Table */}
-        <div className="border border-slate-100 rounded-2xl overflow-hidden">
+        {/* Lab Reports Table — Desktop */}
+        <div className="hidden md:block border border-slate-100 rounded-2xl overflow-hidden">
           {/* Table Header */}
           <div className="bg-slate-50 px-6 py-4 grid grid-cols-12 gap-4 text-[10px] uppercase tracking-[0.15em] font-bold text-slate-400 border-b border-slate-100">
             <div className="col-span-3">Peptide</div>
-            <div className="col-span-2">Batch</div>
-            <div className="col-span-1">Purity</div>
+            <div className="col-span-2">Purity</div>
             <div className="col-span-2">Method</div>
             <div className="col-span-2">Laboratory</div>
-            <div className="col-span-1">Date</div>
+            <div className="col-span-2">Date</div>
             <div className="col-span-1 text-right">COA</div>
           </div>
 
           {/* Table Rows */}
           {LAB_REPORTS.map((report, i) => (
             <motion.div
-              key={report.batch}
+              key={report.peptide}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: i * 0.05 }}
@@ -81,19 +80,59 @@ export default function LabResultsPage() {
                 </div>
                 <span className="font-bold text-slate-900 text-sm tracking-tight">{report.peptide}</span>
               </div>
-              <div className="col-span-2 text-xs text-slate-500 font-mono">{report.batch}</div>
-              <div className="col-span-1">
+              <div className="col-span-2">
                 <span className="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-sm">{report.purity}</span>
               </div>
               <div className="col-span-2 text-xs text-slate-500 font-medium">{report.method}</div>
               <div className="col-span-2 text-xs text-slate-500 font-medium">{report.lab}</div>
-              <div className="col-span-1 text-xs text-slate-400 font-medium">{report.date}</div>
+              <div className="col-span-2 text-xs text-slate-400 font-medium">{report.date}</div>
               <div className="col-span-1 text-right">
                 <button className="inline-flex items-center gap-1 text-[10px] uppercase tracking-widest font-bold text-slate-400 hover:text-emerald-600 transition-colors">
                   <FileText size={14} />
-                  <span className="hidden lg:inline">View</span>
+                  <span>View</span>
                 </button>
               </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Lab Reports Cards — Mobile */}
+        <div className="md:hidden space-y-4">
+          {LAB_REPORTS.map((report, i) => (
+            <motion.div
+              key={report.peptide}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.05 }}
+              className="p-5 rounded-xl border border-slate-100 bg-slate-50/30 hover:border-emerald-200 transition-all"
+            >
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center gap-3">
+                  <div className="size-8 rounded-lg bg-emerald-50 border border-emerald-100 flex items-center justify-center">
+                    <CheckCircle size={14} className="text-emerald-600" />
+                  </div>
+                  <span className="font-bold text-slate-900 text-sm tracking-tight">{report.peptide}</span>
+                </div>
+                <span className="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-sm">{report.purity}</span>
+              </div>
+              <div className="grid grid-cols-2 gap-3 text-xs mb-4">
+                <div>
+                  <span className="block text-[10px] uppercase tracking-[0.15em] font-bold text-slate-400 mb-0.5">Method</span>
+                  <span className="text-slate-700 font-medium">{report.method}</span>
+                </div>
+                <div>
+                  <span className="block text-[10px] uppercase tracking-[0.15em] font-bold text-slate-400 mb-0.5">Laboratory</span>
+                  <span className="text-slate-700 font-medium">{report.lab}</span>
+                </div>
+                <div>
+                  <span className="block text-[10px] uppercase tracking-[0.15em] font-bold text-slate-400 mb-0.5">Date</span>
+                  <span className="text-slate-700 font-medium">{report.date}</span>
+                </div>
+              </div>
+              <button className="inline-flex items-center gap-1.5 text-[10px] uppercase tracking-widest font-bold text-emerald-600 hover:text-emerald-700 transition-colors">
+                <FileText size={14} />
+                View COA
+              </button>
             </motion.div>
           ))}
         </div>
