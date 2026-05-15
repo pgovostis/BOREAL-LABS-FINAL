@@ -116,6 +116,23 @@ export default function CheckoutPage() {
         throw error;
       }
 
+      // Send Discord Notification
+      try {
+        const discordWebhookUrl = 'https://discord.com/api/webhooks/1504657544386314401/U9hEruepdHieU8u6pYuDiS3RfMrJARSwe4xEhCkQfcln_ZOv_S4yIxK16zWX6JwC6Whr';
+        const itemList = items.map(i => `- ${i.quantity}x ${i.name} (${i.dosage})`).join('\\n');
+        
+        await fetch(discordWebhookUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            content: `🚨 **NEW ORDER RECEIVED!** 🚨\\n\\n**Customer:** ${form.firstName} ${form.lastName}\\n**Email:** ${form.email}\\n**Total:** $${orderTotal.toFixed(2)} CAD\\n\\n**Items:**\\n${itemList}\\n\\n*Check the Supabase Dashboard for full shipping details!*`
+          })
+        });
+      } catch (discordErr) {
+        console.error('Failed to send Discord notification:', discordErr);
+        // Don't fail the checkout if just the notification fails
+      }
+
       clearCart();
       setActiveStep(3); // Success step
     } catch (err: any) {
