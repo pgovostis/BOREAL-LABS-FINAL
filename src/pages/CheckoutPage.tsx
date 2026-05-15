@@ -119,13 +119,13 @@ export default function CheckoutPage() {
       // Send Discord Notification
       try {
         const discordWebhookUrl = 'https://discord.com/api/webhooks/1504657544386314401/U9hEruepdHieU8u6pYuDiS3RfMrJARSwe4xEhCkQfcln_ZOv_S4yIxK16zWX6JwC6Whr';
-        const itemList = items.map(i => `> • **${i.quantity}x** ${i.name} (${i.dosage}) - $${(i.price * i.quantity).toFixed(2)}`).join('\\n');
+        const itemList = items.map(i => `> • **${i.quantity}x** ${i.name} (${i.dosage}) - $${(i.price * i.quantity).toFixed(2)}`).join('\n');
         
         await fetch(discordWebhookUrl, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            content: `@everyone\\n\\n🚨 **NEW ORDER RECEIVED!** 🚨\\n\\n👤 **Customer:** ${form.firstName} ${form.lastName}\\n📧 **Email:** ${form.email}\\n📞 **Phone:** ${form.phone || 'N/A'}\\n\\n💰 **Order Total:** $${orderTotal.toFixed(2)} CAD\\n\\n📦 **Items Ordered:**\\n${itemList}\\n\\n*Log into Supabase to view the shipping address and manage this order.*`
+            content: `@everyone\n\n🚨 **NEW ORDER RECEIVED!** 🚨\n\n👤 **Customer:** ${form.firstName} ${form.lastName}\n📧 **Email:** ${form.email}\n📞 **Phone:** ${form.phone || 'N/A'}\n\n💰 **Order Total:** $${orderTotal.toFixed(2)} CAD\n\n📦 **Items Ordered:**\n${itemList}\n\n*Log into Supabase to view the shipping address and manage this order.*`
           })
         });
       } catch (discordErr) {
