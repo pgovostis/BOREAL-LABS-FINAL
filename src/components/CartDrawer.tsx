@@ -2,9 +2,12 @@ import { X, Trash2, Plus, Minus, ShoppingBag } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useCart } from '../lib/CartContext';
 import { Link } from 'react-router-dom';
+import { ALL_PRODUCTS } from '../data/products';
 
 export default function CartDrawer() {
-  const { isCartOpen, setIsCartOpen, items, updateQuantity, removeItem, cartTotal } = useCart();
+  const { isCartOpen, setIsCartOpen, items, updateQuantity, removeItem, cartTotal, addItem } = useCart();
+  const bacWater = ALL_PRODUCTS.find(p => p.id === 'BAC-H2O');
+  const bacWaterInCart = items.some(i => i.productId === 'BAC-H2O');
 
   return (
     <AnimatePresence>
@@ -108,6 +111,37 @@ export default function CartDrawer() {
                     </div>
                   </div>
                 ))
+              )}
+
+              {/* Recommended Add-on */}
+              {items.length > 0 && bacWater && !bacWaterInCart && (
+                <div className="mt-2 p-4 border border-dashed border-emerald-300 bg-white rounded-2xl flex items-center gap-4 shadow-sm">
+                  <div className="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center p-1.5 border border-emerald-100 shrink-0">
+                    {bacWater.image ? (
+                      <img src={bacWater.image} alt={bacWater.name} className="w-full h-full object-contain mix-blend-multiply" />
+                    ) : (
+                      <div className="text-[8px] font-bold text-emerald-800">BAC</div>
+                    )}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-[9px] font-bold uppercase tracking-wider text-emerald-600 mb-0.5">Recommended Add-on</p>
+                    <h4 className="text-xs font-bold text-slate-900 truncate">{bacWater.name}</h4>
+                    <p className="text-[10px] text-slate-500 font-medium">{bacWater.variants[0].price}</p>
+                  </div>
+                  <button
+                    onClick={() => addItem({
+                      id: `${bacWater.slug}-${bacWater.variants[0].dosage}`,
+                      productId: bacWater.id,
+                      name: bacWater.name,
+                      dosage: bacWater.variants[0].dosage,
+                      price: parseFloat(bacWater.variants[0].price.replace('$', '')),
+                      image: bacWater.image,
+                    }, false)}
+                    className="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-[10px] font-bold uppercase tracking-wider rounded-lg transition-colors shrink-0"
+                  >
+                    + Add
+                  </button>
+                </div>
               )}
             </div>
 
