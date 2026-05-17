@@ -52,7 +52,7 @@ export default function AgeDisclaimer() {
             <div className="p-6 sm:p-10 overflow-y-auto">
               {/* Header */}
               <div className="text-center mb-6">
-                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-emerald-50 to-emerald-100 rounded-2xl flex items-center justify-center mx-auto mb-5 border border-emerald-200/50 shadow-sm">
+                <div className="hidden sm:flex w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-emerald-50 to-emerald-100 rounded-2xl items-center justify-center mx-auto mb-5 border border-emerald-200/50 shadow-sm">
                   <ShieldCheck size={32} className="text-emerald-600 sm:w-10 sm:h-10" />
                 </div>
                 <h2 className="text-2xl sm:text-3xl font-display font-bold text-slate-900 tracking-tight mb-1">
