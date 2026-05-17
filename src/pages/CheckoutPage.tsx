@@ -195,6 +195,7 @@ export default function CheckoutPage() {
         </Link>
 
         {/* Free Shipping Banner */}
+        {activeStep !== 3 && (
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -220,10 +221,11 @@ export default function CheckoutPage() {
             />
           </div>
         </motion.div>
+        )}
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <div className={`grid grid-cols-1 ${activeStep !== 3 ? 'lg:grid-cols-12' : ''} gap-8`}>
           {/* ─── LEFT: Customer Info ─── */}
-          <div className="lg:col-span-7">
+          <div className={activeStep !== 3 ? 'lg:col-span-7' : 'max-w-3xl mx-auto w-full'}>
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -490,6 +492,7 @@ export default function CheckoutPage() {
             </motion.div>
 
             {/* Trust Badges */}
+            {activeStep !== 3 && (
             <div className="grid grid-cols-3 gap-4 mt-6">
               {[
                 { icon: ShieldCheck, label: 'Secure Checkout', sub: '256-bit SSL' },
@@ -503,9 +506,11 @@ export default function CheckoutPage() {
                 </div>
               ))}
             </div>
+            )}
           </div>
 
           {/* ─── RIGHT: Order Summary ─── */}
+          {activeStep !== 3 && (
           <div className="lg:col-span-5">
             <div className="sticky top-36">
             <motion.div
@@ -663,6 +668,7 @@ export default function CheckoutPage() {
             )}
             </div>
           </div>
+          )}
         </div>
       </div>
     </div>
