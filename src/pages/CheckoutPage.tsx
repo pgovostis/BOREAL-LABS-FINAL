@@ -176,7 +176,7 @@ export default function CheckoutPage() {
 
   const labelCls = 'block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5';
 
-  if (cartCount === 0) {
+  if (cartCount === 0 && activeStep !== 3) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center pt-28 pb-20 px-6">
         <Package size={64} className="text-slate-200 mb-6" />
