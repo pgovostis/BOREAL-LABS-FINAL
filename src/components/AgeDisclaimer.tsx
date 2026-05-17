@@ -44,12 +44,12 @@ export default function AgeDisclaimer() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.92, y: 20 }}
             transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl overflow-hidden"
+            className="relative w-full max-w-lg max-h-[95dvh] bg-white rounded-3xl shadow-2xl flex flex-col overflow-hidden"
           >
             {/* Top accent bar */}
-            <div className="h-1.5 bg-gradient-to-r from-emerald-500 via-emerald-400 to-teal-500" />
+            <div className="h-1.5 shrink-0 bg-gradient-to-r from-emerald-500 via-emerald-400 to-teal-500" />
 
-            <div className="p-6 sm:p-10">
+            <div className="p-6 sm:p-10 overflow-y-auto">
               {/* Header */}
               <div className="text-center mb-6">
                 <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-emerald-50 to-emerald-100 rounded-2xl flex items-center justify-center mx-auto mb-5 border border-emerald-200/50 shadow-sm">

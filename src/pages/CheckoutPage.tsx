@@ -347,22 +347,23 @@ export default function CheckoutPage() {
                     <p className="text-sm text-slate-500 mb-4">Complete your order and pay securely via Interac e-Transfer.</p>
 
                     <div className="rounded-xl border-2 border-emerald-500 bg-emerald-50/30 overflow-hidden">
-                      <div className="flex items-center gap-4 p-5">
-                        <div className="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center">
-                          <Banknote size={20} className="text-emerald-600" />
+                      <div className="p-4 sm:p-5">
+                        <div className="flex items-center gap-3 mb-3">
+                          <div className="w-10 h-10 shrink-0 rounded-full bg-emerald-100 flex items-center justify-center">
+                            <Banknote size={20} className="text-emerald-600" />
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <span className="text-xl font-extrabold tracking-tight text-slate-800">Interac</span>
+                            <span className="text-sm font-bold text-amber-500 mt-0.5">e-Transfer</span>
+                          </div>
                         </div>
-                        <div className="flex-1">
-                          <span className="font-bold text-sm text-slate-900">Interac e-Transfer</span>
-                          <p className="text-xs text-slate-500 mt-0.5">After placing your order, you'll receive instructions to send an e-Transfer for the exact amount. No processing fees.</p>
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <span className="text-lg font-extrabold tracking-tight text-slate-800">Interac</span>
-                          <span className="text-xs font-bold text-amber-500">e-Transfer</span>
-                        </div>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          After placing your order, you'll receive instructions to send an e-Transfer for the exact amount. No processing fees.
+                        </p>
                       </div>
-                      <div className="px-5 pb-4">
+                      <div className="px-4 sm:px-5 pb-4">
                         <div className="flex items-center gap-2 p-3 bg-white rounded-lg border border-emerald-200">
-                          <ShieldCheck size={14} className="text-emerald-600 shrink-0" />
+                          <ShieldCheck size={16} className="text-emerald-600 shrink-0" />
                           <p className="text-xs text-slate-600">Auto-deposit enabled — your payment is received instantly with no security question required.</p>
                         </div>
                       </div>
