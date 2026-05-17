@@ -18,7 +18,6 @@ interface FormData {
   province: string;
   postalCode: string;
   phone: string;
-  orderNotes: string;
 }
 
 // Canadian provincial/territorial tax rates (GST + PST/HST combined)
@@ -52,7 +51,7 @@ export default function CheckoutPage() {
   const [activeStep, setActiveStep] = useState(0);
   const [form, setForm] = useState<FormData>({
     email: '', firstName: '', lastName: '', address: '', apartment: '',
-    city: '', province: '', postalCode: '', phone: '', orderNotes: '',
+    city: '', province: '', postalCode: '', phone: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState('');
@@ -119,7 +118,6 @@ export default function CheckoutPage() {
           shipping_province: form.province,
           shipping_postal_code: form.postalCode,
           customer_phone: form.phone,
-          order_notes: `[Order #${newOrderNumber}] ${form.orderNotes}`.trim(),
           items: items,
           subtotal: cartTotal,
           discount: discount,
@@ -368,13 +366,6 @@ export default function CheckoutPage() {
                       </div>
                     </div>
 
-                    <div>
-                      <label className={labelCls}>Order Notes (optional)</label>
-                      <textarea rows={3} placeholder="Any special instructions…"
-                        value={form.orderNotes}
-                        onChange={e => update('orderNotes', e.target.value)}
-                        className={inputCls + ' resize-none'} />
-                    </div>
 
                     <div className="flex flex-col sm:flex-row gap-3 mt-2">
                       <button onClick={() => setActiveStep(1)} disabled={isSubmitting}
