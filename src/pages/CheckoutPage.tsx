@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { ShieldCheck, Truck, Lock, ChevronLeft, Package, CreditCard, MapPin, User, Plus, Minus, Trash2, Tag, Loader2, CheckCircle2, Banknote, Copy, Check } from 'lucide-react';
@@ -48,15 +48,35 @@ function generateOrderNumber() {
 
 export default function CheckoutPage() {
   const { items, cartTotal, cartCount, updateQuantity, removeItem, addItem, clearCart } = useCart();
-  const [activeStep, setActiveStep] = useState(0);
+  const [activeStep, setActiveStep] = useState(() => {
+    return sessionStorage.getItem('bl_checkout_step') === '3' ? 3 : 0;
+  });
   const [form, setForm] = useState<FormData>({
     email: '', firstName: '', lastName: '', address: '', apartment: '',
     city: '', province: '', postalCode: '', phone: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState('');
-  const [orderNumber, setOrderNumber] = useState('');
-  const [finalTotal, setFinalTotal] = useState(0);
+  const [orderNumber, setOrderNumber] = useState(() => {
+    return sessionStorage.getItem('bl_order_number') || '';
+  });
+  const [finalTotal, setFinalTotal] = useState(() => {
+    const val = sessionStorage.getItem('bl_final_total');
+    return val ? parseFloat(val) : 0;
+  });
+
+  useEffect(() => {
+    if (cartCount > 0 && activeStep === 3) {
+      setActiveStep(0);
+      sessionStorage.removeItem('bl_checkout_step');
+    }
+  }, [cartCount, activeStep]);
+
+  const clearSuccessState = () => {
+    sessionStorage.removeItem('bl_checkout_step');
+    sessionStorage.removeItem('bl_order_number');
+    sessionStorage.removeItem('bl_final_total');
+  };
   const [copiedField, setCopiedField] = useState<string | null>(null);
 
   const bacWater = ALL_PRODUCTS.find(p => p.id === 'BAC-H2O');
@@ -148,6 +168,9 @@ export default function CheckoutPage() {
         console.error('Failed to send Discord notification:', discordErr);
       }
 
+      sessionStorage.setItem('bl_checkout_step', '3');
+      sessionStorage.setItem('bl_order_number', newOrderNumber);
+      sessionStorage.setItem('bl_final_total', orderTotal.toString());
       setOrderNumber(newOrderNumber);
       setFinalTotal(orderTotal);
       clearCart();
@@ -494,10 +517,10 @@ export default function CheckoutPage() {
                     </div>
 
                     <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                      <Link to="/" className="btn-primary rounded-xl px-8 text-center justify-center">
+                      <Link to="/" onClick={clearSuccessState} className="btn-primary rounded-xl px-8 text-center justify-center">
                         Return Home
                       </Link>
-                      <Link to="/products" className="btn-secondary rounded-xl px-8 text-center justify-center">
+                      <Link to="/products" onClick={clearSuccessState} className="btn-secondary rounded-xl px-8 text-center justify-center">
                         Continue Shopping
                       </Link>
                     </div>
