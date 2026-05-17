@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { DollarSign, Users, TrendingUp, Gift, ArrowRight, CheckCircle } from 'lucide-react';
+import { DollarSign, Users, TrendingUp, Gift, ArrowRight, CheckCircle, Loader2 } from 'lucide-react';
 import { useState } from 'react';
 
 
@@ -7,10 +7,40 @@ import { useState } from 'react';
 export default function AffiliatePage() {
   const [formData, setFormData] = useState({ name: '', email: '', website: '', audience: '' });
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setLoading(true);
+    setError('');
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          access_key: 'b1649c7c-ca6b-4510-82fb-4d2717db75f6',
+          from_name: 'Boreal Labs Affiliate Form',
+          subject: `New Affiliate Application: ${formData.name}`,
+          name: formData.name,
+          email: formData.email,
+          website: formData.website,
+          message: formData.audience,
+        }),
+      });
+
+      const result = await response.json();
+      if (result.success) {
+        setSubmitted(true);
+      } else {
+        setError('Something went wrong. Please try again or email us directly.');
+      }
+    } catch {
+      setError('Network error. Please try again or email us directly at info@boreallabs.ca.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -82,8 +112,14 @@ export default function AffiliatePage() {
                 <textarea rows={4} required value={formData.audience} onChange={e => setFormData({...formData, audience: e.target.value})}
                   className="w-full px-4 py-3 border border-slate-200 rounded-lg text-sm focus:outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400 bg-white resize-none" placeholder="Describe your audience, niche, and how you'd promote Boreal Labs..." />
               </div>
-              <button type="submit" className="btn-primary w-full flex items-center justify-center gap-2">
-                <ArrowRight size={16} /> Submit Application
+              {error && (
+                <div className="p-3 rounded-lg bg-red-50 border border-red-200 text-red-600 text-sm font-medium">
+                  {error}
+                </div>
+              )}
+              <button type="submit" disabled={loading} className="btn-primary w-full flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed">
+                {loading ? <Loader2 size={16} className="animate-spin" /> : <ArrowRight size={16} />}
+                {loading ? 'Submitting...' : 'Submit Application'}
               </button>
             </form>
           )}
