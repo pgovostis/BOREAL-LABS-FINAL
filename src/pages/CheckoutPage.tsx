@@ -243,20 +243,26 @@ export default function CheckoutPage() {
               {/* Steps */}
               {activeStep !== 3 && (
                 <div className="flex border-b border-slate-100">
-                  {steps.map((step, i) => (
-                    <button
-                      key={step.label}
-                      onClick={() => setActiveStep(i)}
-                      className={`flex-1 flex items-center justify-center gap-2 py-4 text-xs font-bold uppercase tracking-wider transition-all relative
-                        ${activeStep === i ? 'text-emerald-600 bg-emerald-50/50' : 'text-slate-400 hover:text-slate-600'}`}
-                    >
-                      <step.icon size={14} />
-                      {step.label}
-                      {activeStep === i && (
-                        <motion.div layoutId="step-indicator" className="absolute bottom-0 left-0 right-0 h-0.5 bg-emerald-500" />
-                      )}
-                    </button>
-                  ))}
+                  {steps.map((step, i) => {
+                    const isLocked = (i === 1 && !isStep0Valid) || (i === 2 && (!isStep0Valid || !isStep1Valid));
+                    return (
+                      <button
+                        key={step.label}
+                        onClick={() => {
+                          if (!isLocked) setActiveStep(i);
+                        }}
+                        disabled={isLocked}
+                        className={`flex-1 flex items-center justify-center gap-2 py-4 text-xs font-bold uppercase tracking-wider transition-all relative
+                          ${activeStep === i ? 'text-emerald-600 bg-emerald-50/50' : isLocked ? 'text-slate-300 cursor-not-allowed opacity-70' : 'text-slate-400 hover:text-slate-600'}`}
+                      >
+                        <step.icon size={14} />
+                        {step.label}
+                        {activeStep === i && (
+                          <motion.div layoutId="step-indicator" className="absolute bottom-0 left-0 right-0 h-0.5 bg-emerald-500" />
+                        )}
+                      </button>
+                    );
+                  })}
                 </div>
               )}
 
