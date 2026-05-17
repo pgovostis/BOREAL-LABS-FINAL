@@ -494,10 +494,10 @@ export default function CheckoutPage() {
                     </div>
 
                     <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                      <Link to="/" className="btn-primary rounded-xl px-8">
+                      <Link to="/" className="btn-primary rounded-xl px-8 text-center justify-center">
                         Return Home
                       </Link>
-                      <Link to="/products" className="btn-secondary rounded-xl px-8">
+                      <Link to="/products" className="btn-secondary rounded-xl px-8 text-center justify-center">
                         Continue Shopping
                       </Link>
                     </div>
