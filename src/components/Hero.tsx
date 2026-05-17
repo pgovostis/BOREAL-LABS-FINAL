@@ -36,9 +36,9 @@ export default function Hero() {
             <Link to="/products" id="browse-catalog-btn" className="btn-primary text-center">
               Explore Catalog
             </Link>
-            <button id="learn-more-btn" className="btn-secondary border shadow-sm text-center">
+            <Link to="/lab-results" id="learn-more-btn" className="btn-secondary border shadow-sm text-center">
               Lab Verified
-            </button>
+            </Link>
           </div>
         </motion.div>
 
