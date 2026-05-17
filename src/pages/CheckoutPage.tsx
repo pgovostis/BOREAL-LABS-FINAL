@@ -464,7 +464,7 @@ export default function CheckoutPage() {
                       {[
                         { step: '1', title: 'Open Your Banking App', desc: 'Log into your bank\'s app or website' },
                         { step: '2', title: 'Send e-Transfer', desc: `Send $${finalTotal.toFixed(2)} to payments@boreallabs.ca` },
-                        { step: '3', title: 'We Ship Your Order', desc: 'Once received, we\'ll ship within 24 hours' },
+                        { step: '3', title: 'We Ship Your Order', desc: 'Payments received before 2:00 PM EST ship same day' },
                       ].map(s => (
                         <div key={s.step} className="flex items-start gap-3 p-4 bg-white rounded-xl border border-slate-100">
                           <div className="w-7 h-7 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs font-bold shrink-0">{s.step}</div>
