@@ -174,6 +174,14 @@ export default function CheckoutPage() {
 
   const labelCls = 'block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5';
 
+  const isStep0Valid = form.email.trim() !== '' && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email);
+  const isStep1Valid = form.firstName.trim() !== '' &&
+                       form.lastName.trim() !== '' &&
+                       form.address.trim() !== '' &&
+                       form.city.trim() !== '' &&
+                       form.province.trim() !== '' &&
+                       form.postalCode.trim() !== '';
+
   if (cartCount === 0 && activeStep !== 3) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center pt-28 pb-20 px-6">
@@ -269,8 +277,8 @@ export default function CheckoutPage() {
                         onChange={e => update('phone', e.target.value)} className={inputCls} />
                     </div>
 
-                    <button onClick={() => setActiveStep(1)}
-                      className="w-full btn-primary rounded-xl mt-2">
+                    <button onClick={() => setActiveStep(1)} disabled={!isStep0Valid}
+                      className="w-full btn-primary rounded-xl mt-2 disabled:opacity-50 disabled:cursor-not-allowed">
                       Continue to Shipping
                     </button>
                   </motion.div>
@@ -334,8 +342,8 @@ export default function CheckoutPage() {
                     <div className="flex flex-col sm:flex-row gap-3 mt-2">
                       <button onClick={() => setActiveStep(0)}
                         className="flex-1 btn-secondary rounded-xl">Back</button>
-                      <button onClick={() => setActiveStep(2)}
-                        className="flex-1 btn-primary rounded-xl">Continue to Payment</button>
+                      <button onClick={() => setActiveStep(2)} disabled={!isStep1Valid}
+                        className="flex-1 btn-primary rounded-xl disabled:opacity-50 disabled:cursor-not-allowed">Continue to Payment</button>
                     </div>
                   </motion.div>
                 )}
@@ -373,8 +381,8 @@ export default function CheckoutPage() {
                     <div className="flex flex-col sm:flex-row gap-3 mt-2">
                       <button onClick={() => setActiveStep(1)} disabled={isSubmitting}
                         className="flex-1 btn-secondary rounded-xl disabled:opacity-50 disabled:cursor-not-allowed">Back</button>
-                      <button onClick={handlePlaceOrder} disabled={isSubmitting}
-                        className="flex-1 btn-primary rounded-xl flex items-center justify-center gap-2 disabled:opacity-75 disabled:cursor-not-allowed">
+                      <button onClick={handlePlaceOrder} disabled={isSubmitting || !isStep0Valid || !isStep1Valid}
+                        className="flex-1 btn-primary rounded-xl flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
                         {isSubmitting ? <Loader2 size={14} className="animate-spin" /> : <Lock size={14} />}
                         {isSubmitting ? 'Processing...' : `Place Order — $${orderTotal.toFixed(2)} CAD`}
                       </button>
