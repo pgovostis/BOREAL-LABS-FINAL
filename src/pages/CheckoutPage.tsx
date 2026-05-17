@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
-import { ShieldCheck, Truck, Lock, ChevronLeft, Package, CreditCard, MapPin, User, Plus, Minus, Trash2, Tag, Loader2, CheckCircle2 } from 'lucide-react';
+import { ShieldCheck, Truck, Lock, ChevronLeft, Package, CreditCard, MapPin, User, Plus, Minus, Trash2, Tag, Loader2, CheckCircle2, Banknote, Copy, Check } from 'lucide-react';
 import { useCart } from '../lib/CartContext';
 import { ALL_PRODUCTS } from '../data/products';
 import { supabase } from '../lib/supabase';
@@ -40,6 +40,13 @@ const PROVINCE_TAX_RATES: Record<string, { rate: number; label: string }> = {
 
 const PROVINCES = Object.keys(PROVINCE_TAX_RATES);
 
+function generateOrderNumber() {
+  const now = new Date();
+  const date = now.toISOString().slice(0, 10).replace(/-/g, '');
+  const rand = Math.random().toString(36).substring(2, 6).toUpperCase();
+  return `BL-${date}-${rand}`;
+}
+
 export default function CheckoutPage() {
   const { items, cartTotal, cartCount, updateQuantity, removeItem, addItem, clearCart } = useCart();
   const [activeStep, setActiveStep] = useState(0);
@@ -49,6 +56,9 @@ export default function CheckoutPage() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState('');
+  const [orderNumber, setOrderNumber] = useState('');
+  const [finalTotal, setFinalTotal] = useState(0);
+  const [copiedField, setCopiedField] = useState<string | null>(null);
 
   const bacWater = ALL_PRODUCTS.find(p => p.id === 'BAC-H2O');
   const bacWaterInCart = items.some(i => i.productId === 'BAC-H2O');
@@ -84,10 +94,18 @@ export default function CheckoutPage() {
     setCouponError('');
   };
 
+  const handleCopy = (text: string, field: string) => {
+    navigator.clipboard.writeText(text);
+    setCopiedField(field);
+    setTimeout(() => setCopiedField(null), 2000);
+  };
+
   const handlePlaceOrder = async () => {
     if (cartCount === 0 && activeStep !== 3) return;
     setIsSubmitting(true);
     setSubmitError('');
+
+    const newOrderNumber = generateOrderNumber();
 
     try {
       const { error } = await supabase.from('orders').insert([
@@ -101,14 +119,14 @@ export default function CheckoutPage() {
           shipping_province: form.province,
           shipping_postal_code: form.postalCode,
           customer_phone: form.phone,
-          order_notes: form.orderNotes,
+          order_notes: `[Order #${newOrderNumber}] ${form.orderNotes}`.trim(),
           items: items,
           subtotal: cartTotal,
           discount: discount,
           shipping_cost: shippingCost,
           tax: tax,
           total: orderTotal,
-          status: 'pending'
+          status: 'awaiting_payment'
         }
       ]);
 
@@ -125,16 +143,17 @@ export default function CheckoutPage() {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            content: `@everyone\n\n🚨 **NEW ORDER RECEIVED!** 🚨\n\n👤 **Customer:** ${form.firstName} ${form.lastName}\n📧 **Email:** ${form.email}\n📞 **Phone:** ${form.phone || 'N/A'}\n\n💰 **Order Total:** $${orderTotal.toFixed(2)} CAD\n\n📦 **Items Ordered:**\n${itemList}\n\n*Log into Supabase to view the shipping address and manage this order.*`
+            content: `@everyone\n\n🚨 **NEW ORDER RECEIVED!** 🚨\n\n🔖 **Order #:** ${newOrderNumber}\n👤 **Customer:** ${form.firstName} ${form.lastName}\n📧 **Email:** ${form.email}\n📞 **Phone:** ${form.phone || 'N/A'}\n\n💰 **Order Total:** $${orderTotal.toFixed(2)} CAD\n💳 **Payment:** Interac e-Transfer (awaiting payment to payments@boreallabs.ca)\n\n📦 **Items Ordered:**\n${itemList}\n\n*Watch for an incoming e-Transfer of $${orderTotal.toFixed(2)} with memo "${newOrderNumber}". Log into Supabase to manage this order.*`
           })
         });
       } catch (discordErr) {
         console.error('Failed to send Discord notification:', discordErr);
-        // Don't fail the checkout if just the notification fails
       }
 
+      setOrderNumber(newOrderNumber);
+      setFinalTotal(orderTotal);
       clearCart();
-      setActiveStep(3); // Success step
+      setActiveStep(3);
     } catch (err: any) {
       console.error('Error placing order:', err);
       setSubmitError(err.message || 'Something went wrong while placing your order. Please try again.');
@@ -325,17 +344,28 @@ export default function CheckoutPage() {
                 {activeStep === 2 && (
                   <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-5">
                     <h2 className="text-lg font-bold text-slate-900 mb-1">Payment Method</h2>
-                    <p className="text-sm text-slate-500 mb-4">You'll be securely redirected to PayPal to complete your purchase.</p>
+                    <p className="text-sm text-slate-500 mb-4">Complete your order and pay securely via Interac e-Transfer.</p>
 
-                    <div className="flex items-center gap-4 p-5 rounded-xl border-2 border-emerald-500 bg-emerald-50/50">
-                      <div className="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center">
-                        <ShieldCheck size={20} className="text-emerald-600" />
+                    <div className="rounded-xl border-2 border-emerald-500 bg-emerald-50/30 overflow-hidden">
+                      <div className="flex items-center gap-4 p-5">
+                        <div className="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center">
+                          <Banknote size={20} className="text-emerald-600" />
+                        </div>
+                        <div className="flex-1">
+                          <span className="font-bold text-sm text-slate-900">Interac e-Transfer</span>
+                          <p className="text-xs text-slate-500 mt-0.5">After placing your order, you'll receive instructions to send an e-Transfer for the exact amount. No processing fees.</p>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <span className="text-lg font-extrabold tracking-tight text-slate-800">Interac</span>
+                          <span className="text-xs font-bold text-amber-500">e-Transfer</span>
+                        </div>
                       </div>
-                      <div className="flex-1">
-                        <span className="font-bold text-sm text-slate-900">Secure PayPal Checkout</span>
-                        <p className="text-xs text-slate-500 mt-0.5">Your payment information is encrypted and processed securely through PayPal. We never store your financial data.</p>
+                      <div className="px-5 pb-4">
+                        <div className="flex items-center gap-2 p-3 bg-white rounded-lg border border-emerald-200">
+                          <ShieldCheck size={14} className="text-emerald-600 shrink-0" />
+                          <p className="text-xs text-slate-600">Auto-deposit enabled — your payment is received instantly with no security question required.</p>
+                        </div>
                       </div>
-                      <span className="text-xl font-bold text-[#003087] tracking-tight">Pay<span className="text-[#009cde]">Pal</span></span>
                     </div>
 
                     <div>
@@ -363,19 +393,106 @@ export default function CheckoutPage() {
                   </motion.div>
                 )}
 
-                {/* Step 3: Success */}
+                {/* Step 3: Success — e-Transfer Instructions */}
                 {activeStep === 3 && (
-                  <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="text-center py-12">
-                    <div className="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                      <CheckCircle2 size={40} />
+                  <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="py-8">
+                    <div className="text-center mb-8">
+                      <div className="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-5">
+                        <CheckCircle2 size={40} />
+                      </div>
+                      <h2 className="text-2xl sm:text-3xl font-display font-bold text-slate-900 mb-2 tracking-tight">Order Placed Successfully!</h2>
+                      <p className="text-slate-500 max-w-md mx-auto">
+                        Complete your payment via Interac e-Transfer to finalize your order.
+                      </p>
                     </div>
-                    <h2 className="text-3xl font-display font-bold text-slate-900 mb-4 tracking-tight">Order Received!</h2>
-                    <p className="text-slate-500 text-lg mb-8 max-w-md mx-auto">
-                      Thank you for your order. We've received your information and will contact you shortly at <span className="font-semibold text-slate-900">{form.email}</span> with payment instructions.
-                    </p>
-                    <Link to="/" className="btn-primary rounded-xl px-8">
-                      Return Home
-                    </Link>
+
+                    {/* Payment Instructions Card */}
+                    <div className="bg-gradient-to-br from-slate-50 to-emerald-50/30 rounded-2xl border border-slate-200 p-6 sm:p-8 mb-6">
+                      <div className="flex items-center gap-2 mb-5">
+                        <Banknote size={18} className="text-emerald-600" />
+                        <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider">e-Transfer Payment Instructions</h3>
+                      </div>
+
+                      <div className="space-y-4">
+                        {/* Send To */}
+                        <div className="flex items-center justify-between p-4 bg-white rounded-xl border border-slate-200">
+                          <div>
+                            <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">Send To</p>
+                            <p className="text-sm font-bold text-slate-900">payments@boreallabs.ca</p>
+                          </div>
+                          <button
+                            onClick={() => handleCopy('payments@boreallabs.ca', 'email')}
+                            className="p-2 rounded-lg hover:bg-slate-100 transition-colors text-slate-400 hover:text-emerald-600"
+                            title="Copy email"
+                          >
+                            {copiedField === 'email' ? <Check size={16} className="text-emerald-600" /> : <Copy size={16} />}
+                          </button>
+                        </div>
+
+                        {/* Amount */}
+                        <div className="flex items-center justify-between p-4 bg-white rounded-xl border border-slate-200">
+                          <div>
+                            <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">Exact Amount</p>
+                            <p className="text-lg font-bold text-slate-900">${finalTotal.toFixed(2)} CAD</p>
+                          </div>
+                          <button
+                            onClick={() => handleCopy(finalTotal.toFixed(2), 'amount')}
+                            className="p-2 rounded-lg hover:bg-slate-100 transition-colors text-slate-400 hover:text-emerald-600"
+                            title="Copy amount"
+                          >
+                            {copiedField === 'amount' ? <Check size={16} className="text-emerald-600" /> : <Copy size={16} />}
+                          </button>
+                        </div>
+
+                        {/* Message / Memo */}
+                        <div className="flex items-center justify-between p-4 bg-white rounded-xl border border-emerald-200 ring-1 ring-emerald-100">
+                          <div>
+                            <p className="text-[10px] font-bold uppercase tracking-wider text-emerald-600 mb-1">Message / Memo (Important)</p>
+                            <p className="text-sm font-bold text-slate-900 font-mono">{orderNumber}</p>
+                          </div>
+                          <button
+                            onClick={() => handleCopy(orderNumber, 'order')}
+                            className="p-2 rounded-lg hover:bg-emerald-50 transition-colors text-slate-400 hover:text-emerald-600"
+                            title="Copy order number"
+                          >
+                            {copiedField === 'order' ? <Check size={16} className="text-emerald-600" /> : <Copy size={16} />}
+                          </button>
+                        </div>
+                      </div>
+
+                      {/* Note */}
+                      <div className="mt-5 p-3 bg-amber-50 border border-amber-200 rounded-lg">
+                        <p className="text-xs text-amber-800">
+                          <strong>Important:</strong> Please include your order number <strong className="font-mono">{orderNumber}</strong> in the e-Transfer message so we can match your payment to your order. Auto-deposit is enabled — no security question needed.
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Steps */}
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-8">
+                      {[
+                        { step: '1', title: 'Open Your Banking App', desc: 'Log into your bank\'s app or website' },
+                        { step: '2', title: 'Send e-Transfer', desc: `Send $${finalTotal.toFixed(2)} to payments@boreallabs.ca` },
+                        { step: '3', title: 'We Ship Your Order', desc: 'Once received, we\'ll ship within 24 hours' },
+                      ].map(s => (
+                        <div key={s.step} className="flex items-start gap-3 p-4 bg-white rounded-xl border border-slate-100">
+                          <div className="w-7 h-7 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs font-bold shrink-0">{s.step}</div>
+                          <div>
+                            <p className="text-sm font-bold text-slate-900">{s.title}</p>
+                            <p className="text-xs text-slate-500 mt-0.5">{s.desc}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                      <Link to="/" className="btn-primary rounded-xl px-8">
+                        Return Home
+                      </Link>
+                      <Link to="/products" className="btn-secondary rounded-xl px-8">
+                        Continue Shopping
+                      </Link>
+                    </div>
                   </motion.div>
                 )}
               </div>
