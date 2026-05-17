@@ -16,6 +16,10 @@ import FAQPage from './pages/FAQPage';
 import ContactPage from './pages/ContactPage';
 import AffiliatePage from './pages/AffiliatePage';
 import CheckoutPage from './pages/CheckoutPage';
+import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
+import TermsOfServicePage from './pages/TermsOfServicePage';
+import RefundPolicyPage from './pages/RefundPolicyPage';
+import ShippingPolicyPage from './pages/ShippingPolicyPage';
 import { CartProvider } from './lib/CartContext';
 import CartDrawer from './components/CartDrawer';
 import AgeDisclaimer from './components/AgeDisclaimer';
@@ -38,6 +42,10 @@ export default function App() {
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/affiliate" element={<AffiliatePage />} />
           <Route path="/checkout" element={<CheckoutPage />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+          <Route path="/terms-of-service" element={<TermsOfServicePage />} />
+          <Route path="/refund-policy" element={<RefundPolicyPage />} />
+          <Route path="/shipping-policy" element={<ShippingPolicyPage />} />
         </Routes>
       </main>
       <Footer />

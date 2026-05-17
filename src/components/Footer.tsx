@@ -26,7 +26,7 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 lg:col-span-2 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:col-span-2 gap-8">
             <div>
               <h4 className="text-[10px] uppercase tracking-[0.2em] font-bold text-slate-400 mb-8">Navigation</h4>
               <ul className="space-y-4 text-slate-900 text-[13px] font-bold">
@@ -34,6 +34,15 @@ export default function Footer() {
                 <li><Link to="/lab-results" className="hover:text-emerald-600 transition-colors">Lab Results</Link></li>
                 <li><Link to="/faq" className="hover:text-emerald-600 transition-colors">FAQ</Link></li>
                 <li><Link to="/contact" className="hover:text-emerald-600 transition-colors">Contact</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="text-[10px] uppercase tracking-[0.2em] font-bold text-slate-400 mb-8">Legal</h4>
+              <ul className="space-y-4 text-slate-900 text-[13px] font-bold">
+                <li><Link to="/privacy-policy" className="hover:text-emerald-600 transition-colors">Privacy Policy</Link></li>
+                <li><Link to="/terms-of-service" className="hover:text-emerald-600 transition-colors">Terms of Service</Link></li>
+                <li><Link to="/refund-policy" className="hover:text-emerald-600 transition-colors">Refund Policy</Link></li>
+                <li><Link to="/shipping-policy" className="hover:text-emerald-600 transition-colors">Shipping Policy</Link></li>
               </ul>
             </div>
             <div>
