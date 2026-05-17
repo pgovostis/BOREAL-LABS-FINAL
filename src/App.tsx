@@ -18,10 +18,12 @@ import AffiliatePage from './pages/AffiliatePage';
 import CheckoutPage from './pages/CheckoutPage';
 import { CartProvider } from './lib/CartContext';
 import CartDrawer from './components/CartDrawer';
+import AgeDisclaimer from './components/AgeDisclaimer';
 
 export default function App() {
   return (
     <CartProvider>
+      <AgeDisclaimer />
       <div className="min-h-screen flex flex-col bg-white">
         <ScrollToTop />
         <Navbar />
