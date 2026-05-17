@@ -387,7 +387,7 @@ export const ALL_PRODUCTS: ProductData[] = [
     categories: ['Reconstitution'],
     variants: [{ dosage: '30mL', price: '$20' }],
     description: 'Authentic Pfizer Bacteriostatic Water for Injection is a sterile, non-pyrogenic preparation containing 0.9% (9 mg/mL) benzyl alcohol added as a bacteriostatic preservative. It is the gold standard and strictly essential for the safe, proper reconstitution and long-term preservation of lyophilized research peptides.',
-    benefits: ['Researched for peptide reconstitution', 'Researched for benzyl alcohol preservation', 'Researched for reconstituted peptide stability', 'Researched for pharmaceutical-grade applications'],
+    benefits: ['Peptide reconstitution', 'Benzyl alcohol preservation', 'Reconstituted peptide stability', 'Pharmaceutical-grade applications'],
     purity: 'Sterile USP',
     form: 'Liquid Solution',
     storage: 'Store at 20° to 25°C (68° to 77°F).',
