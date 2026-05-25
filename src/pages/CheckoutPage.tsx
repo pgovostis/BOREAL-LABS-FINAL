@@ -152,20 +152,28 @@ export default function CheckoutPage() {
         throw error;
       }
 
-      // Send Discord Notification
+      // Send order notification (server-side — webhook URL is never exposed to the browser)
       try {
-        const discordWebhookUrl = 'https://discord.com/api/webhooks/1504657544386314401/U9hEruepdHieU8u6pYuDiS3RfMrJARSwe4xEhCkQfcln_ZOv_S4yIxK16zWX6JwC6Whr';
-        const itemList = items.map(i => `> • **${i.quantity}x** ${i.name} (${i.dosage}) - $${(i.price * i.quantity).toFixed(2)}`).join('\n');
-        
-        await fetch(discordWebhookUrl, {
+        await fetch('/api/notify-order', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            content: `@everyone\n\n🚨 **NEW ORDER RECEIVED!** 🚨\n\n🔖 **Order #:** ${newOrderNumber}\n👤 **Customer:** ${form.firstName} ${form.lastName}\n📧 **Email:** ${form.email}\n📞 **Phone:** ${form.phone || 'N/A'}\n\n💰 **Order Total:** $${orderTotal.toFixed(2)} CAD\n💳 **Payment:** Interac e-Transfer (awaiting payment to payments@boreallabs.ca)\n\n📦 **Items Ordered:**\n${itemList}\n\n*Watch for an incoming e-Transfer of $${orderTotal.toFixed(2)} with memo "${newOrderNumber}". Log into Supabase to manage this order.*`
-          })
+            orderNumber: newOrderNumber,
+            firstName: form.firstName,
+            lastName: form.lastName,
+            email: form.email,
+            phone: form.phone,
+            orderTotal: orderTotal,
+            items: items.map(i => ({
+              name: i.name,
+              dosage: i.dosage,
+              quantity: i.quantity,
+              price: i.price,
+            })),
+          }),
         });
-      } catch (discordErr) {
-        console.error('Failed to send Discord notification:', discordErr);
+      } catch (notifyErr) {
+        console.error('Failed to send order notification:', notifyErr);
       }
 
       sessionStorage.setItem('bl_checkout_step', '3');
