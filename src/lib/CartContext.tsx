@@ -30,7 +30,12 @@ export function CartProvider({ children }: { children: ReactNode }) {
     try {
       const saved = localStorage.getItem('cartItems');
       if (saved) {
-        return JSON.parse(saved);
+        const parsed = JSON.parse(saved);
+        // Migrate old .png/.jpg image paths to .webp
+        return parsed.map((item: CartItem) => ({
+          ...item,
+          image: item.image?.replace(/\.(png|jpg|jpeg)$/i, '.webp'),
+        }));
       }
     } catch (e) {
       console.error("Failed to parse cart items", e);
