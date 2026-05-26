@@ -75,7 +75,7 @@ export default function CartDrawer() {
                   <div key={item.id} className="flex gap-4">
                     <div className="w-20 h-20 bg-slate-50 rounded-xl flex items-center justify-center p-2 border border-slate-100">
                       {item.image ? (
-                        <img src={item.image} alt={item.name} className="w-full h-full object-contain" />
+                        <img src={item.image} alt={item.name} className="w-full h-full object-contain mix-blend-multiply" />
                       ) : (
                         <div className="w-8 h-12 bg-gradient-to-b from-emerald-50 to-emerald-100 rounded shadow-sm relative border border-white/80 flex flex-col items-center justify-center">
                           <div className="text-[6px] font-bold text-emerald-800 tracking-tighter">{item.name.substring(0,3)}</div>

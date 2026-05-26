@@ -55,7 +55,7 @@ export default function ProductCard({ product }: { product: ProductData }) {
             <img 
               src={product.image} 
               alt={product.name}
-              className="w-full h-full object-contain relative scale-[1.15] group-hover:scale-[1.25] transition-transform duration-700"
+              className="w-full h-full object-contain relative scale-[1.15] group-hover:scale-[1.25] transition-transform duration-700 mix-blend-multiply"
             />
           ) : (
             <div className="w-20 h-[75%] bg-gradient-to-b from-slate-50 via-emerald-50 to-emerald-100 rounded-md shadow-2xl relative group-hover:scale-105 group-hover:-rotate-2 transition-transform duration-700 border border-white/80 flex flex-col">
