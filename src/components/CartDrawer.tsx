@@ -18,13 +18,13 @@ export default function CartDrawer() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setIsCartOpen(false)}
-            className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[90]"
+            className="fixed inset-0 bg-slate-900/50 z-[90]"
           />
           <motion.div
             initial={{ x: '100%' }}
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
-            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+            transition={{ type: 'tween', duration: 0.25, ease: 'easeOut' }}
             className="fixed top-0 right-0 h-full w-full max-w-md bg-white shadow-2xl z-[100] flex flex-col"
           >
             {/* Header */}
@@ -52,11 +52,9 @@ export default function CartDrawer() {
                   </span>
                 </div>
                 <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
-                  <motion.div 
-                    initial={{ width: 0 }}
-                    animate={{ width: `${Math.min(100, (cartTotal / 300) * 100)}%` }}
-                    transition={{ duration: 0.5, ease: 'easeOut' }}
-                    className="h-full bg-emerald-500 rounded-full"
+                  <div 
+                    style={{ width: `${Math.min(100, (cartTotal / 300) * 100)}%` }}
+                    className="h-full bg-emerald-500 rounded-full transition-all duration-300 ease-out"
                   />
                 </div>
               </div>
@@ -77,7 +75,7 @@ export default function CartDrawer() {
                   <div key={item.id} className="flex gap-4">
                     <div className="w-20 h-20 bg-slate-50 rounded-xl flex items-center justify-center p-2 border border-slate-100">
                       {item.image ? (
-                        <img src={item.image} alt={item.name} className="w-full h-full object-contain mix-blend-multiply" />
+                        <img src={item.image} alt={item.name} className="w-full h-full object-contain" />
                       ) : (
                         <div className="w-8 h-12 bg-gradient-to-b from-emerald-50 to-emerald-100 rounded shadow-sm relative border border-white/80 flex flex-col items-center justify-center">
                           <div className="text-[6px] font-bold text-emerald-800 tracking-tighter">{item.name.substring(0,3)}</div>

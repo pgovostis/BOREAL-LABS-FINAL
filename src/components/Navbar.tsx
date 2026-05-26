@@ -35,7 +35,7 @@ export default function Navbar() {
     <>
       <div className="fixed top-0 inset-x-0 z-[60] bg-emerald-600 text-white h-8 flex items-center overflow-hidden">
         <div className="whitespace-nowrap animate-marquee flex items-center w-max">
-          {[...Array(20)].map((_, i) => (
+          {[...Array(10)].map((_, i) => (
             <span key={i} className="mx-6 text-[10px] font-bold uppercase tracking-[0.2em] flex items-center gap-6">
               FREE SHIPPING ON ORDERS OVER $300
               <span className="opacity-50">•</span>

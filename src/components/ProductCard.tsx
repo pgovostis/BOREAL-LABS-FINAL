@@ -48,14 +48,14 @@ export default function ProductCard({ product }: { product: ProductData }) {
         whileHover={{ y: -8 }}
         className="group bg-white rounded-2xl border border-slate-100 hover:border-emerald-200 shadow-sm hover:shadow-xl hover:shadow-emerald-500/5 transition-all duration-500 flex flex-col h-full overflow-hidden relative"
       >
-        <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 blur-3xl pointer-events-none group-hover:bg-emerald-500/10 transition-colors" />
+        <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 rounded-full pointer-events-none group-hover:bg-emerald-500/10 transition-colors" />
 
         <div className="relative aspect-[6/5] bg-slate-50 overflow-hidden flex items-end justify-center group-hover:bg-white transition-all p-4">
           {product.image ? (
             <img 
               src={product.image} 
               alt={product.name}
-              className="w-full h-full object-contain relative scale-[1.15] group-hover:scale-[1.25] transition-transform duration-700 mix-blend-multiply"
+              className="w-full h-full object-contain relative scale-[1.15] group-hover:scale-[1.25] transition-transform duration-700"
             />
           ) : (
             <div className="w-20 h-[75%] bg-gradient-to-b from-slate-50 via-emerald-50 to-emerald-100 rounded-md shadow-2xl relative group-hover:scale-105 group-hover:-rotate-2 transition-transform duration-700 border border-white/80 flex flex-col">
