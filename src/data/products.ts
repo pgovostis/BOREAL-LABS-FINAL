@@ -41,7 +41,7 @@ export const ALL_PRODUCTS: ProductData[] = [
     purity: '≥99%',
     form: 'Lyophilized Powder',
     storage: 'Store refrigerated. Keep away from direct sunlight.',
-    image: '/images/epitalon-10mg.png',
+    image: '/images/epitalon-10mg.webp',
   },
   {
     slug: 'nad-plus',
@@ -54,7 +54,7 @@ export const ALL_PRODUCTS: ProductData[] = [
     purity: '≥99%',
     form: 'Lyophilized Powder',
     storage: 'Store refrigerated. Keep sealed and dry.',
-    image: '/images/nad-plus-500mg.png',
+    image: '/images/nad-plus-500mg.webp',
   },
   {
     slug: 'ghk-cu',
@@ -67,7 +67,7 @@ export const ALL_PRODUCTS: ProductData[] = [
     purity: '≥99%',
     form: 'Lyophilized Powder',
     storage: 'Store refrigerated. Keep away from direct sunlight.',
-    image: '/images/ghk-cu-50mg.jpg',
+    image: '/images/ghk-cu-50mg.webp',
   },
   {
     slug: 'kpv',
@@ -80,7 +80,7 @@ export const ALL_PRODUCTS: ProductData[] = [
     purity: '≥99%',
     form: 'Lyophilized Powder',
     storage: 'Store refrigerated. Keep away from direct sunlight.',
-    image: '/images/kpv-10mg.jpg',
+    image: '/images/kpv-10mg.webp',
   },
 
   // ── Tissue Repair ──
@@ -95,7 +95,7 @@ export const ALL_PRODUCTS: ProductData[] = [
     purity: '≥99%',
     form: 'Lyophilized Powder',
     storage: 'Store refrigerated. Reconstitute with bacteriostatic water.',
-    image: '/images/bpc-157-5mg.png',
+    image: '/images/bpc-157-5mg.webp',
   },
   {
     slug: 'tb-500',
@@ -108,7 +108,7 @@ export const ALL_PRODUCTS: ProductData[] = [
     purity: '≥99%',
     form: 'Lyophilized Powder',
     storage: 'Store refrigerated. Keep sealed and protected from moisture.',
-    image: '/images/tb-500-5mg.jpg',
+    image: '/images/tb-500-5mg.webp',
   },
   {
     slug: 'bpc-157-tb-500-blend-5',
@@ -121,7 +121,7 @@ export const ALL_PRODUCTS: ProductData[] = [
     purity: '≥99%',
     form: 'Lyophilized Powder',
     storage: 'Store refrigerated. Reconstitute with bacteriostatic water.',
-    image: '/images/bpc-tb-blend-5mg.png',
+    image: '/images/bpc-tb-blend-5mg.webp',
   },
   {
     slug: 'bpc-157-tb-500-blend-10',
@@ -134,7 +134,7 @@ export const ALL_PRODUCTS: ProductData[] = [
     purity: '≥99%',
     form: 'Lyophilized Powder',
     storage: 'Store refrigerated. Reconstitute with bacteriostatic water.',
-    image: '/images/bpc-tb-blend-10mg.jpg',
+    image: '/images/bpc-tb-blend-10mg.webp',
   },
   {
     slug: 'glow',
@@ -147,7 +147,7 @@ export const ALL_PRODUCTS: ProductData[] = [
     purity: '≥99%',
     form: 'Lyophilized Powder',
     storage: 'Store refrigerated. Keep sealed and dry.',
-    image: '/images/glow-70mg.png',
+    image: '/images/glow-70mg.webp',
   },
   {
     slug: 'klow',
@@ -160,7 +160,7 @@ export const ALL_PRODUCTS: ProductData[] = [
     purity: '≥99%',
     form: 'Lyophilized Powder',
     storage: 'Store refrigerated. Keep sealed and dry.',
-    image: '/images/klow-80mg.png',
+    image: '/images/klow-80mg.webp',
   },
 
   // ── Muscle Growth ──
@@ -175,7 +175,7 @@ export const ALL_PRODUCTS: ProductData[] = [
     purity: '≥99%',
     form: 'Lyophilized Powder',
     storage: 'Store refrigerated. Reconstitute with bacteriostatic water.',
-    image: '/images/cjc-no-dac-10mg.png',
+    image: '/images/cjc-no-dac-10mg.webp',
   },
   {
     slug: 'cjc-1295-with-dac',
@@ -188,7 +188,7 @@ export const ALL_PRODUCTS: ProductData[] = [
     purity: '≥99%',
     form: 'Lyophilized Powder',
     storage: 'Store refrigerated. Keep away from direct sunlight.',
-    image: '/images/cjc-dac-5mg.png',
+    image: '/images/cjc-dac-5mg.webp',
   },
   {
     slug: 'cjc-1295-ipamorelin-blend',
@@ -201,7 +201,7 @@ export const ALL_PRODUCTS: ProductData[] = [
     purity: '≥99%',
     form: 'Lyophilized Powder',
     storage: 'Store refrigerated. Reconstitute with bacteriostatic water.',
-    image: '/images/cjc-ipa-5mg.png',
+    image: '/images/cjc-ipa-5mg.webp',
   },
   {
     slug: 'ipamorelin',
@@ -214,7 +214,7 @@ export const ALL_PRODUCTS: ProductData[] = [
     purity: '≥99%',
     form: 'Lyophilized Powder',
     storage: 'Store refrigerated. Keep away from direct sunlight.',
-    image: '/images/ipamorelin-10mg.png',
+    image: '/images/ipamorelin-10mg.webp',
   },
   {
     slug: 'sermorelin',
@@ -227,7 +227,7 @@ export const ALL_PRODUCTS: ProductData[] = [
     purity: '≥99%',
     form: 'Lyophilized Powder',
     storage: 'Store refrigerated. Reconstitute with bacteriostatic water.',
-    image: '/images/sermorelin-10mg.jpg',
+    image: '/images/sermorelin-10mg.webp',
   },
   {
     slug: 'tesamorelin',
@@ -240,7 +240,7 @@ export const ALL_PRODUCTS: ProductData[] = [
     purity: '≥99%',
     form: 'Lyophilized Powder',
     storage: 'Store refrigerated. Keep sealed and protected from moisture.',
-    image: '/images/tesamorelin-10mg.png',
+    image: '/images/tesamorelin-10mg.webp',
   },
   {
     slug: 'igf-1-lr3',
@@ -253,7 +253,7 @@ export const ALL_PRODUCTS: ProductData[] = [
     purity: '≥99%',
     form: 'Lyophilized Powder',
     storage: 'Store refrigerated. Handle with care — sensitive to heat.',
-    image: '/images/igf-1-lr3-1mg.png',
+    image: '/images/igf-1-lr3-1mg.webp',
   },
   {
     slug: 'aod-9604',
@@ -266,7 +266,7 @@ export const ALL_PRODUCTS: ProductData[] = [
     purity: '≥99%',
     form: 'Lyophilized Powder',
     storage: 'Store refrigerated. Keep away from direct sunlight.',
-    image: '/images/aod-9604-5mg.png',
+    image: '/images/aod-9604-5mg.webp',
   },
 
   // ── Fat Loss ──
@@ -281,7 +281,7 @@ export const ALL_PRODUCTS: ProductData[] = [
     purity: '≥99%',
     form: 'Lyophilized Powder',
     storage: 'Store refrigerated. Do not freeze.',
-    image: '/images/semaglutide-5mg.jpg',
+    image: '/images/semaglutide-5mg.webp',
   },
   {
     slug: 'tirzepatide',
@@ -294,7 +294,7 @@ export const ALL_PRODUCTS: ProductData[] = [
     purity: '≥99%',
     form: 'Lyophilized Powder',
     storage: 'Store refrigerated. Do not freeze.',
-    image: '/images/tirzepatide-10mg.jpg',
+    image: '/images/tirzepatide-10mg.webp',
   },
   {
     slug: 'retatrutide',
@@ -307,7 +307,7 @@ export const ALL_PRODUCTS: ProductData[] = [
     purity: '≥99%',
     form: 'Lyophilized Powder',
     storage: 'Store refrigerated. Do not freeze.',
-    image: '/images/retatrutide-10mg.jpg',
+    image: '/images/retatrutide-10mg.webp',
   },
   {
     slug: 'mots-c',
@@ -320,7 +320,7 @@ export const ALL_PRODUCTS: ProductData[] = [
     purity: '≥99%',
     form: 'Lyophilized Powder',
     storage: 'Store refrigerated. Keep sealed and dry.',
-    image: '/images/mots-c-10mg.jpg',
+    image: '/images/mots-c-10mg.webp',
   },
 
   // ── Nootropics ──
@@ -335,7 +335,7 @@ export const ALL_PRODUCTS: ProductData[] = [
     purity: '≥99%',
     form: 'Lyophilized Powder',
     storage: 'Store refrigerated. Keep away from direct sunlight.',
-    image: '/images/semax-10mg.jpg',
+    image: '/images/semax-10mg.webp',
   },
   {
     slug: 'selank',
@@ -348,7 +348,7 @@ export const ALL_PRODUCTS: ProductData[] = [
     purity: '≥99%',
     form: 'Lyophilized Powder',
     storage: 'Store refrigerated. Keep away from direct sunlight.',
-    image: '/images/selank-10mg.jpg',
+    image: '/images/selank-10mg.webp',
   },
 
   // ── Tanning ──
@@ -363,7 +363,7 @@ export const ALL_PRODUCTS: ProductData[] = [
     purity: '≥99%',
     form: 'Lyophilized Powder',
     storage: 'Store refrigerated. Keep away from direct sunlight.',
-    image: '/images/mt-1-10mg.jpg',
+    image: '/images/mt-1-10mg.webp',
   },
   {
     slug: 'melanotan-2',
@@ -376,7 +376,7 @@ export const ALL_PRODUCTS: ProductData[] = [
     purity: '≥99%',
     form: 'Lyophilized Powder',
     storage: 'Store refrigerated. Keep away from direct sunlight.',
-    image: '/images/mt-2-10mg.jpg',
+    image: '/images/mt-2-10mg.webp',
   },
 
   // ── Reconstitution ──
@@ -391,7 +391,7 @@ export const ALL_PRODUCTS: ProductData[] = [
     purity: 'Sterile USP',
     form: 'Liquid Solution',
     storage: 'Store at 20° to 25°C (68° to 77°F).',
-    image: '/images/pfizer-bac-water.png',
+    image: '/images/pfizer-bac-water.webp',
   },
 ];
 

@@ -59,7 +59,7 @@ export default function Hero() {
 
           <div className="relative z-20 animate-float mt-8 lg:mt-0">
              <img 
-               src="/images/bpc-157-vial.png" 
+               src="/images/bpc-157-vial.webp" 
                alt="Boreal Labs BPC-157 Peptide Vial" 
                className="w-64 lg:w-72 xl:w-80 drop-shadow-2xl mx-auto"
              />
