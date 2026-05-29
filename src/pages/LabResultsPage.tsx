@@ -34,7 +34,7 @@ export default function LabResultsPage() {
         <div className="grid sm:grid-cols-3 gap-6 mb-16">
           {[
             { icon: <ShieldCheck size={24} />, title: 'Third-Party Verified', desc: 'All testing performed by independent accredited labs' },
-            { icon: <Microscope size={24} />, title: 'HPLC & Mass Spec', desc: 'Industry gold-standard analytical methods' },
+            { icon: <Microscope size={24} />, title: 'HPLC', desc: 'Industry gold-standard analytical methods' },
             { icon: <FlaskConical size={24} />, title: '99%+ Purity Guarantee', desc: 'Every batch meets our minimum purity threshold' },
           ].map((badge, i) => (
             <motion.div
