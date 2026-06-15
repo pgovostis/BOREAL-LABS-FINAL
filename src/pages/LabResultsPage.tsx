@@ -130,7 +130,7 @@ export default function LabResultsPage() {
             <div className="flex items-center gap-3 p-4 rounded-xl bg-emerald-50/60 border border-emerald-100">
               <ShieldCheck size={18} className="text-emerald-600 shrink-0" />
               <p className="text-xs text-emerald-700 font-semibold">
-                All of our peptides are verified at ≥99% purity through independent HPLC and mass spectrometry analysis.
+                All of our peptides are verified at ≥99% purity through independent HPLC analysis.
               </p>
             </div>
           </div>
